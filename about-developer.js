@@ -21,7 +21,7 @@ function renderDev(t) {
   if (p && DEV_PHOTO_URL) p.src = DEV_PHOTO_URL;
   if (LOGO_URL) document.querySelectorAll(".li").forEach(function (i) { i.src = LOGO_URL; });
   var b = document.getElementById("devBio");
-  if (b && t) b.textContent = t.devBio + "\n" + (t.devMore || T.en.devMore).join("\n");
+  if (b) b.textContent = T.en.devBio + "\n" + T.en.devMore.join("\n");
   devLabel();
 }
 
