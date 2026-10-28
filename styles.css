@@ -1,8 +1,8 @@
 :root{--p:#DF1E5A;--pt:#C2194D;--ph:#C2194D;--pr:rgba(223,30,90,.2);--op:#FFFFFF;--pc:#FCE4EC;--opc:#7A0F31;--sc:#F9D5E0;--osc:#7A0F31;--s:#FFFFFF;--os:#121212;--sl:#F8F9FA;--sh:#F8F9FA;--sv:#E0E0E0;--osv:#5F5F5F;--ol:#E0E0E0;--ok:#146C2E;--er:#B3261E;color-scheme:light}
 html[data-theme="dark"]{--p:#DF1E5A;--pt:#FF7BA3;--ph:#C2194D;--pr:rgba(223,30,90,.2);--op:#FFFFFF;--pc:#5A1230;--opc:#FFD9E3;--sc:#4A1D2D;--osc:#FFD9E3;--s:#121212;--os:#FFFFFF;--sl:#1E1E1E;--sh:#1E1E1E;--sv:#333333;--osv:#B3B3B3;--ol:#333333;--ok:#146C2E;--er:#B3261E;color-scheme:dark}
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;-webkit-user-select:none;user-select:none}
-html,body{width:100dvw;height:100dvh;overflow:hidden;overscroll-behavior:none;background:var(--s);color:var(--os);font-family:Roboto,sans-serif;font-size:19px;line-height:1.45;transition:background .25s,color .25s}
-button,select{font-family:Roboto,sans-serif;font-size:19px;color:inherit;border:0;background:none}
+html,body{width:100dvw;height:100dvh;overflow:hidden;overscroll-behavior:none;background:var(--s);color:var(--os);font-family:"Plus Jakarta Sans",Roboto,sans-serif;font-size:19px;line-height:1.45;transition:background .25s,color .25s}
+button,select{font-family:"Plus Jakarta Sans",Roboto,sans-serif;font-size:19px;color:inherit;border:0;background:none}
 #app{width:100dvw;height:100dvh;display:flex;flex-direction:column;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 .ic{width:26px;height:26px;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .ic.f{fill:currentColor;stroke:none}.ic.lg{width:32px;height:32px}.ic.xl{width:36px;height:36px}
@@ -263,3 +263,7 @@ mark{background:var(--pc);color:var(--opc);padding:0 6px;border-radius:6px;font-
 .pgi>*{animation:rise .5s ease both}
 .pgi>*:nth-child(2){animation-delay:.08s}
 @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+/* Fix: pages scroll instead of collapsing when content grows (Show more) */
+.modal:not(.tm)>*{flex-shrink:0}
+.dcard,#devBio,.tc{flex-shrink:0}
