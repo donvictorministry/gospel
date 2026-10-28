@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <title>Gospel For All</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" id="themeMeta" content="#FFF8F4">
+<meta name="theme-color" id="themeMeta" content="#FFFFFF">
 <meta name="description" content="Share the Word of God in six languages and help reach six million souls across six continents.">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Gospel For All">
@@ -66,9 +66,9 @@
     <div class="ticker" aria-live="off"><div class="tk" id="tk"></div></div>
     <div class="pgi">
       <div class="sr">
-        <div class="sc"><svg class="ic"><use href="#i-eye"/></svg><b id="nV">0</b><span data-i="statViews"></span></div>
-        <button class="sc act" id="btnReach"><svg class="ic f"><use href="#i-team"/></svg><b id="nR">0</b><span data-i="statReached"></span></button>
-        <button class="sc act" id="btnLike"><svg class="ic f"><use href="#i-heart"/></svg><b id="nL">0</b><span data-i="statLikes"></span></button>
+        <button class="sc act" id="btnViews"><span class="sci"><svg class="ic"><use href="#i-eye"/></svg></span><b id="nV">0</b><span class="scl" data-i="statViews"></span></button>
+        <button class="sc act" id="btnReach"><span class="sci"><svg class="ic f"><use href="#i-team"/></svg></span><b id="nR">0</b><span class="scl" data-i="statReached"></span></button>
+        <button class="sc act" id="btnLike"><span class="sci"><svg class="ic f"><use href="#i-heart"/></svg></span><b id="nL">0</b><span class="scl" data-i="statLikes"></span></button>
       </div>
       <div class="mn">
         <div class="mt" data-i="ministryTitle"></div>
@@ -119,10 +119,8 @@
 <aside class="drawer r" id="dR">
   <div class="dh"><button class="ib dbk" data-close aria-label="Back"><svg class="ic"><use href="#i-back"/></svg></button><div class="lg big"><svg class="lgr" viewBox="0 0 100 100"><use href="#i-gearring"/></svg><img class="li" src="icon-192.png" alt="Gospel For All"></div><b>Gospel For All</b></div>
   <nav class="dn">
-    <button class="di" data-theme-opt="dark" data-keep="1"><span class="sw" style="background:linear-gradient(135deg,#17120E 50%,#FFB870 50%)"></span><span data-i="themeDark"></span><svg class="ic ck"><use href="#i-check"/></svg></button>
-    <button class="di" data-theme-opt="light" data-keep="1"><span class="sw" style="background:linear-gradient(135deg,#FFF8F4 50%,#8B5000 50%)"></span><span data-i="themeLight"></span><svg class="ic ck"><use href="#i-check"/></svg></button>
-    <button class="di" data-theme-opt="green" data-keep="1"><span class="sw" style="background:linear-gradient(135deg,#F6FBF3 50%,#006D3B 50%)"></span><span data-i="themeGreen"></span><svg class="ic ck"><use href="#i-check"/></svg></button>
-    <button class="di" data-theme-opt="blue" data-keep="1"><span class="sw" style="background:linear-gradient(135deg,#F8F9FF 50%,#0061A4 50%)"></span><span data-i="themeBlue"></span><svg class="ic ck"><use href="#i-check"/></svg></button>
+    <button class="di" data-theme-opt="dark" data-keep="1"><span class="sw" style="background:linear-gradient(135deg,#121212 50%,#DF1E5A 50%)"></span><span data-i="themeDark"></span><svg class="ic ck"><use href="#i-check"/></svg></button>
+    <button class="di" data-theme-opt="light" data-keep="1"><span class="sw" style="background:linear-gradient(135deg,#FFFFFF 50%,#DF1E5A 50%)"></span><span data-i="themeLight"></span><svg class="ic ck"><use href="#i-check"/></svg></button>
     <div class="dv"></div>
     <button class="di" id="btnShare"><svg class="ic"><use href="#i-share"/></svg><span data-i="shareApp"></span></button>
     <button class="di" id="btnInstall"><svg class="ic"><use href="#i-dl"/></svg><span data-i="install"></span></button>
@@ -206,7 +204,7 @@
   <button class="tg" id="devMore" hidden></button>
 </section>
 
-<div class="toast" id="toast"></div>
+<div class="alrt" id="toast" role="alertdialog" aria-live="assertive"><div class="alc"><span class="ali" id="toastIco"><svg class="ic xl"><use id="toastUse" href="#i-info"/></svg></span><p class="alm" id="toastMsg"></p></div></div>
 
 <script src="block-computer.js"></script>
 <script src="translation.js"></script>
