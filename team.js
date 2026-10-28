@@ -2,8 +2,8 @@
    EDIT THE TEAM ARRAY BELOW: put each member's real name, role, short tag, photo URL and bio.
    Leave photo as "" to keep the placeholder. */
 var TEAM = [
-  { name: "Amb. David Etim", tag: "Director", role: "Co Founder | Director | Senior Administrator", photo:"https://i.ibb.co/0RvC1sCc/Screenshot-20260214-191218.png",
-    bio: "Amb. David is a worship leader and professional instrumentalist who has impacted thousands of lives across different nations through his live worship performances and numerous gospel albums. He is the Co-Founder, Director, and Senior Administrator of Don Victor Ministries, working closely with the Founder to strengthen the ministry’s operations and advance its global vision with integrity, unity, and excellence." },
+  { name: "Team Member 1", tag: "Prayer", role: "Prayer and Intercession Lead", photo: "",
+    bio: "Leads daily prayer for every outreach, app release and partner church. Gathers prayer requests from the community and brings them before God each morning. Hosts weekly online prayer across time zones." },
   { name: "Team Member 2", tag: "Scripture", role: "Scripture and Content Editor", photo: "",
     bio: "Reviews every verse, devotional and message before it is published. Makes sure the Word is handled faithfully and clearly. Keeps the content simple enough for a new believer and deep enough to grow on." },
   { name: "Team Member 3", tag: "Translation", role: "Translation Lead", photo: "",
@@ -28,7 +28,7 @@ var TEAM = [
   var cards = "";
   TEAM.forEach(function (m) {
     cards += '<div class="tc"><img class="tp" src="' + src(m) + '" width="150" height="150" alt="' + m.name + '">' +
-      '<div class="tn2">' + m.name + '</div><div class="tr">' + m.role + '</div><p class="tbio">' + m.bio + '</p></div>';
+      '<div class="tn2">' + m.name + '</div><div class="tr">' + m.role + '</div><p class="tbio clamp">' + m.bio.replace(/([.!?]) +/g, "$1\n") + '</p><button class="tg tgm" hidden></button></div>';
   });
   var sec = document.createElement("section");
   sec.className = "modal tm";
@@ -42,6 +42,21 @@ var TEAM = [
   GFA.render();
 
   var tl = document.getElementById("tl");
+  window.teamMeasure = function () {
+    tl.querySelectorAll(".tbio").forEach(function (p) {
+      p.classList.add("clamp");
+      var b = p.nextElementSibling;
+      b.hidden = !(p.scrollHeight > p.clientHeight + 2);
+      b.textContent = T.en.showMore;
+    });
+  };
+  tl.addEventListener("click", function (e) {
+    var b = e.target.closest(".tgm");
+    if (!b) return;
+    var p = b.previousElementSibling;
+    p.classList.toggle("clamp");
+    b.textContent = p.classList.contains("clamp") ? T.en.showMore : T.en.showLess;
+  });
   document.getElementById("tDown").onclick = function () { tl.scrollTo({ top: tl.scrollHeight, behavior: "smooth" }); };
   document.getElementById("tUp").onclick = function () { tl.scrollTo({ top: 0, behavior: "smooth" }); };
   document.getElementById("tClose").onclick = GFA.close;
@@ -58,12 +73,13 @@ var TEAM = [
     if (!canRun()) return;
     running = true;
     var dev = document.getElementById("devPhoto");
-    var items = [{ s: dev ? dev.src : PH, n: DEV_NAME.split(" ")[0] }];
+    var items = [{ s: dev ? dev.src : PH, n: DEV_NAME.split(" ")[0], dev: true }];
     TEAM.forEach(function (m) { items.push({ s: src(m), n: m.tag }); });
     var strip = document.createElement("div");
     strip.className = "pr";
     strip.innerHTML = items.map(function (p) {
-      return '<div class="pit"><img src="' + p.s + '" width="96" height="96" alt=""><span>' + p.n + '</span></div>';
+      var im = p.dev ? '<div class="dpw" style="--z:100px"><div class="ring"><span class="orb"><svg class="ic"><use href="#i-code"/></svg></span></div><div class="photo"><img src="' + p.s + '" alt=""></div></div>' : '<img src="' + p.s + '" width="96" height="96" alt="">';
+      return '<div class="pit">' + im + '<span>' + p.n + '</span></div>';
     }).join("");
     document.body.appendChild(strip);
     strip.onclick = function () { strip.remove(); running = false; tl.scrollTop = 0; GFA.open("mTeam"); };
