@@ -69,7 +69,7 @@ select{width:100%;height:56px;padding:0 16px;border:1px solid var(--ol);border-r
 .chips span{font-size:19px;padding:6px 14px;border-radius:10px;background:var(--s);color:var(--osv);border:1px solid var(--ol)}
 
 /* Developer bio */
-.db{white-space:pre-line;text-align:left}
+.db{white-space:pre-line;text-align: center}
 .db.clamp{display:-webkit-box;-webkit-line-clamp:5;-webkit-box-orient:vertical;overflow:hidden}
 .tg{align-self:center;margin-top:8px;height:48px;padding:0 20px;border-radius:24px;color:var(--pt);font-weight:500;position:relative;overflow:hidden}
 .tg[hidden]{display:none}
@@ -84,7 +84,7 @@ select{width:100%;height:56px;padding:0 16px;border:1px solid var(--ol);border-r
 .pph img{width:120px;height:120px;border-radius:50%;object-fit:cover;display:block;background:var(--sh)}
 .pn{font-size:24px;font-weight:500}
 .pro{font-size:19px;color:var(--pt);font-weight:500;text-align:center}
-.ptx{width:100%;min-height:260px;font-size:21px;line-height:1.5;text-align:left;padding:12px 4px}
+.ptx{width:100%;min-height:260px;font-size:21px;line-height:1.5;text-align: center;padding:12px 4px}
 .cur{display:inline-block;width:3px;height:1.1em;background:var(--p);margin-left:2px;vertical-align:text-bottom;animation:blink 1s steps(1) infinite}
 @keyframes blink{50%{opacity:0}}
 .pic{display:none;color:var(--pt);vertical-align:middle;margin-left:6px}
@@ -100,7 +100,7 @@ select{width:100%;height:56px;padding:0 16px;border:1px solid var(--ol);border-r
 .tp{width:150px;height:150px;border-radius:50%;object-fit:cover;display:block;border:3px solid var(--pc);background:var(--sh)}
 .tn2{font-size:22px;font-weight:500}
 .tr{font-size:19px;color:var(--pt);font-weight:500;text-align:center}
-.tbio{font-size:19px;line-height:1.5;color:var(--osv);text-align:left;width:100%}
+.tbio{font-size:19px;line-height:1.5;color:var(--osv);text-align: center;width:100%}
 .tb{flex:none;display:flex;justify-content:center;padding-top:8px}
 .fab{width:56px;height:56px;border-radius:16px;background:var(--pc);color:var(--opc);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;box-shadow:0 2px 6px rgba(0,0,0,.25)}
 .fab::after,.tg::after{content:"";position:absolute;left:0;top:0;right:0;bottom:0;background:var(--pr);opacity:0;transition:opacity .15s}
