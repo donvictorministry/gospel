@@ -1,3 +1,4 @@
+
 /* quiz.js: the "More" landing page. Three buttons open full-screen pages with a back arrow
    that returns to More. Load after game.js, series1.js and series2.js (a missing file just hides its button). */
 (function () {
@@ -9,7 +10,7 @@
   var SER = window.TRIVIA_SERIES || {};
   var series = Object.keys(SER).map(function (k) { return SER[k]; }).sort(function (a, b) { return a.order - b.order; });
   var game = window.DV && DV.routes.game;
-  var colors = ["#1565C0", "#2E7D32"], icons = ["i-book", "i-quiz"];
+  var colors = ["var(--p)", "var(--p)"], icons = ["i-book", "i-quiz"];
 
   function btn(id, color, icon, title, sub) {
     return '<button class="mb" id="' + id + '" style="background:' + color + '"><span class="mi"><svg class="ic xl"><use href="#' + icon + '"/></svg></span>' +
@@ -18,7 +19,7 @@
 
   /* Page */
   var html = "";
-  if (game) html += btn("btnGame", "#B45309", "i-game", "JESUS Slide Puzzle", "Slide the tiles to spell JESUS");
+  if (game) html += btn("btnGame", "var(--p)", "i-game", "JESUS Slide Puzzle", "Slide the tiles to spell JESUS");
   series.forEach(function (s, i) {
     html += btn("btnS" + i, colors[i % colors.length], icons[i % icons.length], "Bible Trivia: " + s.title, s.subtitle + " (" + s.questions.length + " questions)");
   });
