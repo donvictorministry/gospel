@@ -1,4 +1,3 @@
-
 /* quiz.js: the "More" landing page. Three buttons open full-screen pages with a back arrow
    that returns to More. Load after game.js, series1.js and series2.js (a missing file just hides its button). */
 (function () {
