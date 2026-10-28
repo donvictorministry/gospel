@@ -1,11 +1,6 @@
-/* Developer modal data.
-   To use your real photo: open index.html, find <img id="devPhoto"> and replace its src with your photo URL,
-   or set DEV_PHOTO_URL below (example: "me.jpg" placed in the same folder).
-   The popup and the team parade reuse this same photo automatically. */
-var DEV_PHOTO_URL = "";
-var DEV_NAME = "Chris Johnson, PhD";
-/* Logo for the header and both sidebars: set a URL here, or replace icon-192.png */
-var LOGO_URL = "";
+var DEV_PHOTO_URL = "https://app.donvictorministry.org.ng/gospel/donvictor-image.png";
+var DEV_NAME = "Rev. Don Victor, PhD";
+var LOGO_URL = "https://app.donvictorministry.org.ng/gospel/dvg.png";
 
 function devLabel() {
   var L = T.en;
