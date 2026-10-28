@@ -14,6 +14,13 @@ function devLabel() {
   if (b && m) m.textContent = b.classList.contains("clamp") ? (L.showMore || T.en.showMore) : (L.showLess || T.en.showLess);
 }
 
+var HL = ["digital technology ministry", "Progressive Web Apps", "six million souls", "six continents", "Android phones", "Biblefirm"];
+function hl(s) {
+  s = s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  HL.forEach(function (k) { s = s.split(k).join("<mark>" + k + "</mark>"); });
+  return s;
+}
+
 function renderDev(t) {
   var n = document.getElementById("devName");
   if (n) n.textContent = DEV_NAME;
@@ -21,7 +28,7 @@ function renderDev(t) {
   if (p && DEV_PHOTO_URL) p.src = DEV_PHOTO_URL;
   if (LOGO_URL) document.querySelectorAll(".li").forEach(function (i) { i.src = LOGO_URL; });
   var b = document.getElementById("devBio");
-  if (b) b.textContent = T.en.devBio + "\n" + T.en.devMore.join("\n");
+  if (b) b.innerHTML = hl(T.en.devBio + "\n" + T.en.devMore.join("\n"));
   devLabel();
 }
 
@@ -39,5 +46,13 @@ function devMeasure() {
   if (m) m.onclick = function () {
     document.getElementById("devBio").classList.toggle("clamp");
     devLabel();
+  };
+})();
+
+/* Verified Developer button */
+(function () {
+  var v = document.getElementById("devVerify");
+  if (v) v.onclick = function () {
+    if (window.GFA) GFA.toast(DEV_NAME + " is the verified founder and lead developer of Biblefirm.", "ok");
   };
 })();
