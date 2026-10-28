@@ -1,4 +1,4 @@
-var CACHE = "gospel-for-all-v6.2";
+var CACHE = "gospel-for-all-v7";
 var FILES = [
   "./", "index.html", "styles.css", "app.js", "verse.js", "translation.js",
   "about-developer.js", "popup.js", "team.js", "stats.js", "game.js", "series1.js", "series2.js", "quiz.js", "block-computer.js", "manifest.json",
