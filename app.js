@@ -1,12 +1,13 @@
+
 (function () {
   if (window.BLOCKED) return;
 
   /* Fill in your real contact details. Empty values show a toast instead of opening. */
   var CONTACT = {
-    email: "donvictorministry@gmail.com",      
-    phone: "+2347035794649",      
-    whatsapp: "2348086590253",   
-    facebook: "https://facebook.com/Rev.DonVictor"   
+    email: "",      // example: "you@example.com"
+    phone: "",      // example: "+2348000000000"
+    whatsapp: "",   // digits with country code, example: "2348000000000"
+    facebook: ""    // full link, example: "https://facebook.com/yourpage"
   };
 
   var $ = function (id) { return document.getElementById(id); };
