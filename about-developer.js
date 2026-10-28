@@ -8,7 +8,7 @@ var DEV_NAME = "Chris Johnson, PhD";
 var LOGO_URL = "";
 
 function devLabel() {
-  var L = T[document.documentElement.lang] || T.en;
+  var L = T.en;
   var b = document.getElementById("devBio");
   var m = document.getElementById("devMore");
   if (b && m) m.textContent = b.classList.contains("clamp") ? (L.showMore || T.en.showMore) : (L.showLess || T.en.showLess);
