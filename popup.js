@@ -39,7 +39,7 @@
 
   function open() {
     if (el || document.querySelector(".modal.open")) return;
-    var L = T[document.documentElement.lang] || T.en, P = L.popup || T.en.popup;
+    var P = T.en.popup;
     SEG = P.map(function (t, k) { return { t: t, icon: k === P.length - 1 }; });
     el = document.createElement("div");
     el.className = "pop";
