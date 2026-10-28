@@ -1,4 +1,5 @@
-var CACHE = "gospel-for-all-v8";
+var FONTS = "gfa-fonts-v1";
+var CACHE = "gospel-for-all-v8.4";
 var FILES = [
   "./", "index.html", "styles.css", "app.js", "verse.js", "translation.js",
   "about-developer.js", "popup.js", "team.js", "stats.js", "game.js", "series1.js", "series2.js", "quiz.js", "block-computer.js", "manifest.json",
@@ -12,14 +13,28 @@ self.addEventListener("install", function (e) {
 
 self.addEventListener("activate", function (e) {
   e.waitUntil(caches.keys().then(function (keys) {
-    return Promise.all(keys.filter(function (k) { return k !== CACHE; }).map(function (k) { return caches.delete(k); }));
+    return Promise.all(keys.filter(function (k) { return k !== CACHE && k !== FONTS; }).map(function (k) { return caches.delete(k); }));
   }));
   self.clients.claim();
 });
 
 self.addEventListener("fetch", function (e) {
   if (e.request.method !== "GET") return;
-  if (new URL(e.request.url).origin !== self.location.origin) return;
+  var u = new URL(e.request.url);
+  if (u.hostname === "fonts.googleapis.com" || u.hostname === "fonts.gstatic.com") {
+    e.respondWith(caches.open(FONTS).then(function (c) {
+      return c.match(e.request).then(function (hit) {
+        if (hit && u.hostname === "fonts.gstatic.com") return hit;
+        var net = fetch(e.request).then(function (r) {
+          if (r && (r.ok || r.type === "opaque")) c.put(e.request, r.clone());
+          return r;
+        }).catch(function () { return hit; });
+        return hit || net;
+      });
+    }));
+    return;
+  }
+  if (u.origin !== self.location.origin) return;
   e.respondWith(
     caches.match(e.request).then(function (hit) {
       return hit || fetch(e.request).then(function (res) {
