@@ -2,7 +2,7 @@
    EDIT THE TEAM ARRAY BELOW: put each member's real name, role, short tag, photo URL and bio.
    Leave photo as "" to keep the placeholder. */
 var TEAM = [
-  { name: "Amb. David Etim", tag: "Director", role: "Co Founder | Director | Senior Administrator", photo: "https://i.ibb.co/0RvC1sCc/Screenshot-20260214-191218.png",
+  { name: "Amb. David Etim", tag: "Director", role: "Co Founder | Director | Senior Administrator", photo:"https://i.ibb.co/0RvC1sCc/Screenshot-20260214-191218.png",
     bio: "Amb. David is a worship leader and professional instrumentalist who has impacted thousands of lives across different nations through his live worship performances and numerous gospel albums. He is the Co-Founder, Director, and Senior Administrator of Don Victor Ministries, working closely with the Founder to strengthen the ministry’s operations and advance its global vision with integrity, unity, and excellence." },
   { name: "Team Member 2", tag: "Scripture", role: "Scripture and Content Editor", photo: "",
     bio: "Reviews every verse, devotional and message before it is published. Makes sure the Word is handled faithfully and clearly. Keeps the content simple enough for a new believer and deep enough to grow on." },
