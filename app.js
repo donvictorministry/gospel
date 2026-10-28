@@ -17,15 +17,17 @@
 
   var saved = load("bf_lang");
   var nav = (navigator.language || "en").slice(0, 2).toLowerCase();
-  lang = (saved && T[saved]) ? saved : (T[nav] ? nav : "en");
+  lang = (saved && LANGS[saved]) ? saved : (LANGS[nav] ? nav : "en");
 
-  function toast(msg) {
-    var el = $("toast");
-    el.textContent = msg;
-    el.classList.add("show");
+  function toast(msg, kind) {
+    $("toastMsg").textContent = msg;
+    $("toastIco").className = "ali " + (kind || "");
+    $("toastUse").setAttribute("href", kind === "ok" ? "#i-check" : kind === "err" ? "#i-x" : "#i-info");
+    $("toast").classList.add("show");
     clearTimeout(tt);
-    tt = setTimeout(function () { el.classList.remove("show"); }, 2400);
+    tt = setTimeout(function () { $("toast").classList.remove("show"); }, 2600);
   }
+  $("toast").onclick = function () { $("toast").classList.remove("show"); };
 
   function esc(s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
   function col(c) { return /^(#[0-9a-fA-F]{3,8}|[a-zA-Z]{3,20})$/.test(c) ? c : ""; }
@@ -35,8 +37,8 @@
   }
 
   function render() {
-    var t = T[lang];
-    document.documentElement.lang = lang;
+    var t = T.en;
+    document.documentElement.lang = "en";
     document.querySelectorAll("[data-i]").forEach(function (e) {
       var k = e.getAttribute("data-i");
       var tv = t[k] || T.en[k];
@@ -117,38 +119,38 @@
 
   /* Install */
   window.addEventListener("beforeinstallprompt", function (e) { e.preventDefault(); deferred = e; });
-  window.addEventListener("appinstalled", function () { deferred = null; toast(T[lang].installedOk); });
+  window.addEventListener("appinstalled", function () { deferred = null; toast(T.en.installedOk, "ok"); });
   $("btnInstall").onclick = function () {
-    if (window.matchMedia("(display-mode: standalone)").matches) { toast(T[lang].installed); return; }
-    if (deferred) { deferred.prompt(); deferred = null; } else { toast(T[lang].noInstall); }
+    if (window.matchMedia("(display-mode: standalone)").matches) { toast(T.en.installed); return; }
+    if (deferred) { deferred.prompt(); deferred = null; } else { toast(T.en.noInstall); }
   };
 
   /* Share App: Bluetooth (Android share sheet), WhatsApp, Facebook */
   var url = location.href.split("#")[0];
   $("shBt").onclick = function () {
     if (navigator.share) {
-      navigator.share({ title: "Gospel For All", text: T[lang].shareText, url: url }).catch(function () {});
-    } else { toast(T[lang].shareFail); }
+      navigator.share({ title: "Gospel For All", text: T.en.shareText, url: url }).catch(function () {});
+    } else { toast(T.en.shareFail, "err"); }
   };
   $("shWa").onclick = function () {
-    window.open("https://wa.me/?text=" + encodeURIComponent(T[lang].shareText + " " + url), "_blank");
+    window.open("https://wa.me/?text=" + encodeURIComponent(T.en.shareText + " " + url), "_blank");
   };
   $("shFb").onclick = function () {
     window.open("https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(url), "_blank");
   };
 
   /* Contact */
-  $("cEmail").onclick = function () { CONTACT.email ? (location.href = "mailto:" + CONTACT.email) : toast(T[lang].notSet); };
-  $("cFb").onclick = function () { CONTACT.facebook ? window.open(CONTACT.facebook, "_blank") : toast(T[lang].notSet); };
-  $("cPhone").onclick = function () { CONTACT.phone ? (location.href = "tel:" + CONTACT.phone) : toast(T[lang].notSet); };
-  $("cWa").onclick = function () { CONTACT.whatsapp ? window.open("https://wa.me/" + CONTACT.whatsapp, "_blank") : toast(T[lang].notSet); };
+  $("cEmail").onclick = function () { CONTACT.email ? (location.href = "mailto:" + CONTACT.email) : toast(T.en.notSet, "err"); };
+  $("cFb").onclick = function () { CONTACT.facebook ? window.open(CONTACT.facebook, "_blank") : toast(T.en.notSet, "err"); };
+  $("cPhone").onclick = function () { CONTACT.phone ? (location.href = "tel:" + CONTACT.phone) : toast(T.en.notSet, "err"); };
+  $("cWa").onclick = function () { CONTACT.whatsapp ? window.open("https://wa.me/" + CONTACT.whatsapp, "_blank") : toast(T.en.notSet, "err"); };
 
   if ("serviceWorker" in navigator) {
     window.addEventListener("load", function () { navigator.serviceWorker.register("sw.js").catch(function () {}); });
   }
 
-  /* Themes: light (default), dark, green, blue */
-  var THEMES = { light: "#FFF8F4", dark: "#17120E", green: "#F6FBF3", blue: "#F8F9FF" };
+  /* Themes: light (default) and dark */
+  var THEMES = { light: "#FFFFFF", dark: "#121212" };
   var theme = THEMES[load("gfa_theme")] ? load("gfa_theme") : "light";
   function applyTheme() {
     document.documentElement.setAttribute("data-theme", theme);
@@ -190,7 +192,7 @@
   window.GFA = {
     open: openM,
     close: closeM,
-    t: function (k) { return (T[lang] || T.en)[k] || T.en[k]; },
+    t: function (k) { return T.en[k]; },
     render: render,
     hook: function (id, open, close) { HOOKS[id] = { open: open, close: close, on: false }; },
     toast: toast
