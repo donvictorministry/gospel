@@ -24,6 +24,7 @@ var STATS_URL = "";
   function save() { sv("gfa_s", JSON.stringify({ t: S, a: sync })); }
   function paint() {
     KEYS.forEach(function (k) { $(ID[k]).textContent = (S[k] || 0).toLocaleString(); });
+    $("btnViews").classList.toggle("done", !due("views"));
     $("btnReach").classList.toggle("done", !due("reached"));
     $("btnLike").classList.toggle("done", !due("likes"));
   }
@@ -40,10 +41,14 @@ var STATS_URL = "";
     sv("gfa_t_" + k, Date.now());
     S[k] = (S[k] || 0) + 1;
     save(); paint();
-    if (!quiet) GFA.toast(GFA.t("likedOk"));
+    if (!quiet) GFA.toast(GFA.t("likedOk"), "ok");
     call("a=hit&k=" + k + "&d=" + did);
   }
 
+  $("btnViews").onclick = function () {
+    GFA.toast(GFA.t("viewsInfo"));
+    if (STATS_URL && Date.now() - sync > 60000) call("a=get");
+  };
   $("btnReach").onclick = function () { hit("reached"); };
   $("btnLike").onclick = function () { hit("likes"); };
   /* Ticker from the database: shown from the phone cache, refreshed at most every 10 minutes */
