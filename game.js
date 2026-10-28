@@ -6,55 +6,55 @@
   var dvgCSS = `
 /* ══ CFG TOKENS — light ══ */
 #dv-bg-w {
-  --bg:         #fff3d6;
-  --bg2:        #ffffff;
-  --surface:    #ffffff;
-  --chrome-bg:  #fff3d6;
-  --text:       #1c1e21;
-  --text-mute:  #65676b;
-  --brand:      #1877F2;
-  --tile-a:     #ffd166;
-  --tile-b:     #f5a623;
-  --tile-sh:    #b9780f;
-  --tile-txt:   #5c3a00;
-  --glow:       rgba(255,204,77,0.9);
-  --btn-bg:     #fff0b3;
-  --btn-txt:    #7a5200;
-  --streak-bg:  #fff0b3;
-  --streak-txt: #7a5200;
-  --over-bg:    #fff3d6;
-  --over-txt:   #1c1e21;
-  --rule:       #e8c84a;
-  --cert-bg:    #fffdf2;
-  --cert-frame: #c8a000;
-  --cert-txt:   #2a1a00;
-  --cert-mute:  #7a5200;
+  --bg:         #F8F9FA;
+  --bg2:        #FFFFFF;
+  --surface:    #FFFFFF;
+  --chrome-bg:  #FFFFFF;
+  --text:       #121212;
+  --text-mute:  #5F5F5F;
+  --brand:      #DF1E5A;
+  --tile-a:     #DF1E5A;
+  --tile-b:     #C2194D;
+  --tile-sh:    #8E1038;
+  --tile-txt:   #FFFFFF;
+  --glow:       rgba(223,30,90,0.55);
+  --btn-bg:     #FCE4EC;
+  --btn-txt:    #C2194D;
+  --streak-bg:  #FCE4EC;
+  --streak-txt: #C2194D;
+  --over-bg:    #FFFFFF;
+  --over-txt:   #121212;
+  --rule:       #E0E0E0;
+  --cert-bg:    #FFFFFF;
+  --cert-frame: #DF1E5A;
+  --cert-txt:   #121212;
+  --cert-mute:  #5F5F5F;
 }
 /* ══ CFG TOKENS — dark ══ */
 #dv-bg-w.dv-dark {
-  --bg:         #0d1117;
-  --bg2:        #161b22;
-  --surface:    #21262d;
-  --chrome-bg:  #1a1200;
-  --text:       #e6edf3;
-  --text-mute:  #8b949e;
-  --brand:      #58a6ff;
-  --tile-a:     #c07c00;
-  --tile-b:     #a06000;
-  --tile-sh:    #603800;
-  --tile-txt:   #ffe299;
-  --glow:       rgba(255,180,50,0.85);
-  --btn-bg:     #2d2200;
-  --btn-txt:    #ffd166;
-  --streak-bg:  #2d2200;
-  --streak-txt: #ffd166;
-  --over-bg:    #0d1117;
-  --over-txt:   #e6edf3;
-  --rule:       #7a5200;
-  --cert-bg:    #161b22;
-  --cert-frame: #b8900a;
-  --cert-txt:   #ffd166;
-  --cert-mute:  #8b949e;
+  --bg:         #121212;
+  --bg2:        #1E1E1E;
+  --surface:    #1E1E1E;
+  --chrome-bg:  #1E1E1E;
+  --text:       #FFFFFF;
+  --text-mute:  #B3B3B3;
+  --brand:      #DF1E5A;
+  --tile-a:     #DF1E5A;
+  --tile-b:     #C2194D;
+  --tile-sh:    #7A0F31;
+  --tile-txt:   #FFFFFF;
+  --glow:       rgba(223,30,90,0.7);
+  --btn-bg:     #3A1A25;
+  --btn-txt:    #FFFFFF;
+  --streak-bg:  #3A1A25;
+  --streak-txt: #FF7BA3;
+  --over-bg:    #121212;
+  --over-txt:   #FFFFFF;
+  --rule:       #333333;
+  --cert-bg:    #1E1E1E;
+  --cert-frame: #DF1E5A;
+  --cert-txt:   #FFFFFF;
+  --cert-mute:  #B3B3B3;
 }
 
 /* ══ CONTAINER ══ */
@@ -217,7 +217,7 @@
 }
 .dvg-tile.blank { visibility: hidden; }
 .dvg-tile.glow {
-  background: linear-gradient(160deg, #ffe08a, #ffcc4d);
+  background: linear-gradient(160deg, #FF5C8A, #DF1E5A);
   box-shadow: 0 6px 0 var(--tile-sh), 0 0 28px var(--glow);
 }
 .dvg-cross {
@@ -962,7 +962,7 @@
 
   /* ══ CONFETTI ══ */
   function confetti(){
-    var cols=['#ffd700','#c0c0c0','#4a0e4e','#1877F2','#ff6b6b','#51cf66','#ff922b'];
+    var cols=['#DF1E5A','#C2194D','#146C2E','#121212','#FF7BA3'];
     for(var i=0;i<90;i++){
       var p=document.createElement('div');
       p.className='dvg-confetti';
