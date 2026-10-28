@@ -1,4 +1,3 @@
-
 (function () {
   if (window.BLOCKED) return;
 
@@ -82,6 +81,7 @@
     $(id).classList.add("open");
     if (id.charAt(0) === "d") scrim.classList.add("show");
     if (id === "mDev" && window.devMeasure) devMeasure();
+    if (id === "mTeam" && window.teamMeasure) teamMeasure();
   }
   function openM(id) {
     if (stack[stack.length - 1] === id) return;
