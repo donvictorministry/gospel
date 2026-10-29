@@ -3,7 +3,7 @@ var LANGS = {en:"English", es:"Español", fr:"Français", pt:"Português", sw:"K
 var T = {
   en: {
     menuProp:"Proprietary Notice", propTitle:"Proprietary Software Notification", propHead:"IMPORTANT NOTICE",
-    propP1:"This is a proprietary software product developed exclusively by Rev. Dr. Chris Johnson, PhD and DV Biblefirm.",
+    propP1:"This is a proprietary software product developed exclusively by Rev. Dr. Rev. Don Victor, PhD",
     propP2:"You are authorized to use this application for personal and ministry purposes only. Any unauthorized reproduction, distribution, or modification of this application is strictly prohibited and constitutes a violation of intellectual property law.",
     propP3:"Don Victor Ministries actively monitors for unauthorized use and will take appropriate legal action where necessary.",
     propThanks:"Thank you for respecting the work and ministry behind this application.",
@@ -21,8 +21,8 @@ var T = {
     shareTitle:"Share this app", shareSub:"Send Gospel For All to someone who needs hope",
     bt:"Bluetooth", wa:"WhatsApp", fb:"Facebook",
     contactTitle:"Contact Us", contactSub:"Reach out to us anytime",
-    devTitle:"About Developer", devRole:"Founder and Lead Developer, Biblefirm",
-    devBio:"Building Progressive Web Apps that carry the Gospel to every nation through education, community, productivity and engagement.",
+    devTitle:"About Developer", devRole:"Prophet of God | Founder & Visionary | Trainer | Researcher | Full Stack Developer",
+    devBio:"Building digital Applications that carry the Gospel to every nation through education, community, productivity and engagement.",
     noInstall:"Open the Chrome menu and tap Install app", installed:"App is already installed", installedOk:"App installed",
     shareFail:"Sharing is not available on this phone", notSet:"This contact is not set up yet",
     shareText:"Gospel For All: the Word of God in nine languages.",
