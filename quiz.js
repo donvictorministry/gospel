@@ -36,19 +36,56 @@
     $("btnGame").onclick = function () { GFA.open("gGame"); };
   }
 
-  /* Trivia page (one full-screen modal reused by every series) */
+  /* Trivia page: one full-screen modal. Four answers plus NEXT fit one screen (no scrolling). */
   var sec = document.createElement("section");
   sec.className = "modal";
   sec.id = "mQuiz";
-  sec.innerHTML = '<div class="mh"><button class="x" id="qBack" aria-label="Back"><svg class="ic"><use href="#i-back"/></svg></button><h2 id="qTitle"></h2></div><div id="qBody"></div>';
+  sec.innerHTML =
+    '<div class="mh"><button class="x" id="qBack" aria-label="Back"><svg class="ic"><use href="#i-back"/></svg></button><h2 id="qTitle"></h2></div>' +
+    '<div class="qh"><div id="qBody"></div>' +
+    '<div class="qpop" id="qPop"><div class="qph"><span class="qpi" id="qPi"><svg class="ic"><use id="qPu" href="#i-check"/></svg></span><b id="qPt"></b><span class="qpc" id="qPc"></span>' +
+    '<button class="x qpx" id="qPx" aria-label="Close"><svg class="ic"><use href="#i-x"/></svg></button></div>' +
+    '<p class="qpv" id="qPv"></p><div class="qpb"><i id="qPb"></i></div></div></div>';
   document.body.appendChild(sec);
-  $("qBack").onclick = GFA.close;
 
-  var cur = null, qi = 0, score = 0, locked = false;
+  var cur = null, qi = 0, score = 0, locked = false, tm = null, left = 0;
+
+  function popClose() {
+    clearInterval(tm);
+    tm = null;
+    $("qPop").classList.remove("show");
+    var n = $("qn");
+    if (n) n.disabled = false;
+  }
+  function popOpen(ok, verse) {
+    clearInterval(tm);
+    left = 10;
+    var p = verse.split(" \u2014 "), bar = $("qPb");
+    $("qPt").textContent = ok ? "Correct!" : "Not quite";
+    $("qPi").className = "qpi " + (ok ? "" : "no");
+    $("qPu").setAttribute("href", ok ? "#i-check" : "#i-x");
+    $("qPv").innerHTML = "<b>" + esc(p[0]) + "</b><br>" + esc(p.slice(1).join(" \u2014 "));
+    $("qPc").textContent = left + "s";
+    bar.style.transition = "none";
+    bar.style.width = "100%";
+    $("qPop").classList.add("show");
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () { bar.style.transition = "width 10s linear"; bar.style.width = "0%"; });
+    });
+    tm = setInterval(function () {
+      left--;
+      $("qPc").textContent = Math.max(left, 0) + "s";
+      if (left <= 0) popClose();
+    }, 1000);
+  }
+  $("qPx").onclick = popClose;
+  $("qBack").onclick = function () { popClose(); GFA.close(); };
+
   function draw() {
     var n = cur.questions.length, b = $("qBody");
     locked = false;
-    sec.scrollTop = 0;
+    clearInterval(tm);
+    $("qPop").classList.remove("show");
     if (qi >= n) {
       b.innerHTML = '<div class="qr"><div class="qsc">' + score + ' / ' + n + '</div><p class="qq">' + (score === n ? "Perfect score!" : "Well done!") + '</p><p class="mp">' + esc(cur.reflection) + '</p>' +
         '<div class="stack"><button class="btn" id="qAgain">Play again</button><button class="btn alt" id="qMore">Back to More</button></div></div>';
@@ -58,19 +95,20 @@
     }
     var q = cur.questions[qi];
     b.innerHTML = '<div class="qp">Question ' + (qi + 1) + ' of ' + n + '</div><div class="qb"><i style="width:' + (qi / n * 100) + '%"></i></div>' +
-      '<div class="qc">' + esc(q.cat) + ' · ' + esc(q.diff) + '</div><p class="qq">' + esc(q.text) + '</p><div class="qos">' +
-      q.options.map(function (o, k) { return '<button class="qo" data-k="' + k + '">' + esc(o) + '</button>'; }).join("") + '</div><div id="qx"></div>';
+      '<div class="qc">' + esc(q.cat) + '</div><p class="qq">' + esc(q.text) + '</p><div class="qos">' +
+      q.options.map(function (o, k) { return '<button class="qo" data-k="' + k + '">' + esc(o) + '</button>'; }).join("") +
+      '<button class="btn qn" id="qn" disabled>' + (qi + 1 < n ? "Next" : "See result") + '</button></div>';
     b.querySelectorAll(".qo").forEach(function (el) {
       el.onclick = function () {
         if (locked) return;
         locked = true;
-        var k = +el.getAttribute("data-k");
-        if (k === q.correct) score++; else el.classList.add("no");
+        var k = +el.getAttribute("data-k"), ok = k === q.correct;
+        if (ok) score++; else el.classList.add("no");
         b.querySelectorAll(".qo")[q.correct].classList.add("ok");
-        $("qx").innerHTML = '<div class="qv"><svg class="ic"><use href="#i-book"/></svg><span>' + esc(q.verse) + '</span></div><button class="btn" id="qn">' + (qi + 1 < n ? "Next question" : "See result") + '</button>';
-        $("qn").onclick = function () { qi++; draw(); };
+        popOpen(ok, q.verse);
       };
     });
+    $("qn").onclick = function () { if (!this.disabled) { qi++; draw(); } };
   }
   series.forEach(function (s, i) {
     $("btnS" + i).onclick = function () {
