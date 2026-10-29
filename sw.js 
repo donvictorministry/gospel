@@ -1,5 +1,5 @@
 var FONTS = "gfa-fonts-v1";
-var CACHE = "gospel-for-all-v8.4";
+var CACHE = "gospel-for-all-v8.5";
 var FILES = [
   "./", "index.html", "styles.css", "app.js", "verse.js", "translation.js",
   "about-developer.js", "popup.js", "team.js", "stats.js", "game.js", "series1.js", "series2.js", "quiz.js", "block-computer.js", "manifest.json",
