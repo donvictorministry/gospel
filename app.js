@@ -100,7 +100,7 @@
   $("btnMenuL").onclick = function () { openM("dL"); };
   $("btnMenuR").onclick = function () { openM("dR"); };
   [["btnShare", "mShare"], ["btnContact", "mContact"], ["btnDev", "mDev"], ["btnAbout", "mAbout"],
-   ["btnHow", "mHow"], ["btnTerms", "mTerms"], ["btnSupport", "mSupport"]].forEach(function (p) {
+   ["btnHow", "mHow"], ["btnTerms", "mTerms"], ["btnProp", "mProp"], ["btnSupport", "mSupport"]].forEach(function (p) {
     $(p[0]).onclick = function () { openM(p[1]); };
   });
   document.querySelectorAll(".drawer").forEach(function (d) {
