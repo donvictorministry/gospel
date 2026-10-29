@@ -1,26 +1,88 @@
-var LANGS = {en:"English", es:"Español", fr:"Français", pt:"Português", sw:"Kiswahili", de:"Deutsch", ha:"Hausa", yo:"Yorùbá", ig:"Igbo"};
+/* stats.js: Views, Reached and Likes with 24-hour limits (client side) and tiny server use.
+   Paste your Apps Script Web app URL below (see Deployment.md). Empty = counts stay on this phone only. */
+var STATS_URL = "https://script.google.com/macros/s/AKfycbywYuTqGQr1zowyi7s2wx4cg2en2KLzLc24JsiRfWx7SfuH6_VXiwqGiE4iLj50jwg/exec";
 
-var T = {
-  en: {
-    viewsInfo:"Views are counted automatically, once a day for each phone.",
-    navMore:"More", moreSub:"Games and quizzes to grow your faith",
-    navHome:"Home", navQuiz:"Quiz", menuAbout:"About the App", menuHow:"How to Use", menuTerms:"Terms of Use", menuSupport:"Support Us", themeDark:"Dark mode", themeLight:"Light mode", themeGreen:"Green mode", themeBlue:"Blue mode", statViews:"Views", statReached:"Reached", statLikes:"Likes", soon:"Coming soon", likedOk:"Thank you, counted!", likedAlready:"Already counted today. Come back tomorrow.",
-    aboutP1:"Gospel For All is a free Progressive Web App from Biblefirm, a digital technology ministry. Our mission is to reach six million souls across six continents for the Lord.", aboutP2:"Read Scripture in nine languages, including Hausa, Yoruba and Igbo, and share it with the people you love in one tap.", aboutP3:"The app is built for Android phones, uses very little data and keeps working offline after you install it.", howP1:"Home: see how many people have viewed the app, been reached and liked it.", howP2:"Tap Like to show your support. Tap Reached after you share the app with someone. Each one counts once every 24 hours.", howP3:"Verse of Hope: choose your language, then tap Next Verse to read more Scripture.", howP4:"Left menu (three lines): learn about the app and the developer, meet the team, read the terms, support us or contact us.", howP5:"Right menu (three dots): change the color mode, share the app or install it on your phone.", howP6:"Share the app with at least two people every week and tell us in our WhatsApp community.", termsP1:"By using Gospel For All you agree to use it in a respectful and lawful way.", termsP2:"The app is free. Scripture texts are provided for personal reading and sharing.", termsP3:"We count views, people reached and likes anonymously. A random code is saved on your phone to allow each action once every 24 hours.", termsP4:"Do not copy, resell or misuse the app or its content for harmful purposes.", termsP5:"We may update these terms as the ministry grows. Continued use means you accept the changes.", privT:"Our Privacy", privP:"We use telemetry data to deliver and maintain this application, to track outages, and to protect against spam, fraud and abuse. We also measure audience engagement and site statistics to understand how our app is used and to improve the quality of its features.", privP2:"Telemetry can include your approximate country and city, internet provider, connection type, device and browser details, screen size, time zone and the site you came from. We do not collect your name, phone number or exact location.",
-    termsP6:"Questions? Use Contact Us from the left menu.", supP1:"Gospel For All is free because partners like you carry it forward. Here is how you can support the mission:", supP2:"1. Share the app with at least two people every week.", supP3:"2. Pray for the team and for every soul reached.", supP4:"3. Join our WhatsApp community and share your testimony.", supP5:"4. Partner with us to take the Gospel to your city or nation.",
-    teamTitle:"Our Ministry Team", btnTeam:"Meet Our Team", btnWhy:"Why I Built This", showMore:"Show more", showLess:"Show less",
-    ministryTitle:"Digital Technology Ministry", statSouls:"souls to reach", statContinents:"continents", statLanguages:"languages",
-    popup:["I built this app and made it accessible because I believe the Gospel is for everyone. My vision to reach six million souls across six continents for the Lord has never been more urgent than it is now!", "Join me in sharing this app with at least two people every week! Together, let us spread the Gospel and trust God to work in our lives this season.", "Let me know through our WhatsApp community when you have done so.", "God bless you!"],
-    devMore:["Founder and lead developer of Biblefirm, a digital technology ministry.", "Builds Progressive Web Apps across education, community, productivity and engagement.", "Every app is made to run on low-cost Android phones, even with weak internet.", "Mission: to reach six million souls across six continents for the Lord.", "Gospel For All is free, open to everyone, and made to be shared."],
-    tag:"Reaching six million souls across six continents", verseLbl:"Verse of Hope", next:"Next Verse",
-    install:"Install App", shareApp:"Share App", contact:"Contact Us", about:"About Developer",
-    shareTitle:"Share this app", shareSub:"Send Gospel For All to someone who needs hope",
-    bt:"Bluetooth", wa:"WhatsApp", fb:"Facebook",
-    contactTitle:"Contact Us", contactSub:"Reach out to us anytime",
-    devTitle:"About Developer", devRole:"Founder and Lead Developer, Biblefirm",
-    devBio:"Building Progressive Web Apps that carry the Gospel to every nation through education, community, productivity and engagement.",
-    noInstall:"Open the Chrome menu and tap Install app", installed:"App is already installed", installedOk:"App installed",
-    shareFail:"Sharing is not available on this phone", notSet:"This contact is not set up yet",
-    shareText:"Gospel For All: the Word of God in nine languages.",
-    ticker:["Reaching six million souls across six continents","The Word of God in nine languages","Install Gospel For All and share it with someone today"]
-  },
-};
+(function () {
+  if (window.BLOCKED || !window.GFA) return;
+  var DAY = 86400000, KEYS = ["views", "reached", "likes"], ID = { views: "nV", reached: "nR", likes: "nL" };
+  var $ = function (i) { return document.getElementById(i); };
+  function ld(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
+  function sv(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+
+  var S = { views: 0, reached: 0, likes: 0 }, sync = 0;
+  try { var c = JSON.parse(ld("gfa_s") || "null"); if (c && c.t) { S = c.t; sync = c.a || 0; } } catch (e) {}
+
+  var did = ld("gfa_did");
+  if (!did) {
+    var a = new Uint8Array(12);
+    crypto.getRandomValues(a);
+    did = Array.prototype.map.call(a, function (b) { return ("0" + b.toString(16)).slice(-2); }).join("");
+    sv("gfa_did", did);
+  }
+
+  function due(k) { return Date.now() - (+ld("gfa_t_" + k) || 0) > DAY; }
+  function save() { sv("gfa_s", JSON.stringify({ t: S, a: sync })); }
+  function paint() {
+    KEYS.forEach(function (k) { $(ID[k]).textContent = (S[k] || 0).toLocaleString(); });
+    $("btnViews").classList.toggle("done", !due("views"));
+    $("btnReach").classList.toggle("done", !due("reached"));
+    $("btnLike").classList.toggle("done", !due("likes"));
+  }
+
+  function call(q) {
+    if (!STATS_URL) return;
+    fetch(STATS_URL + "?" + q).then(function (r) { return r.json(); }).then(function (j) {
+      if (j && j.t) {
+        if (j.ok === 0 && /a=hit/.test(q)) KEYS.forEach(function (k) { S[k] = Math.max(S[k] || 0, j.t[k] || 0); });
+        else S = j.t;
+        sync = Date.now(); save(); paint();
+      }
+    }).catch(function () {});
+  }
+
+  function hit(k, quiet) {
+    if (!due(k)) { if (!quiet) GFA.toast(GFA.t("likedAlready")); return; }
+    sv("gfa_t_" + k, Date.now());
+    S[k] = (S[k] || 0) + 1;
+    save(); paint();
+    if (!quiet) GFA.toast(GFA.t("likedOk"), "ok");
+    call("a=hit&k=" + k + "&d=" + did);
+  }
+
+  $("btnViews").onclick = function () {
+    GFA.toast(GFA.t("viewsInfo"));
+    if (STATS_URL && Date.now() - sync > 60000) call("a=get");
+  };
+  $("btnReach").onclick = function () { hit("reached"); };
+  $("btnLike").onclick = function () { hit("likes"); };
+  /* Ticker from the database: shown from the phone cache, refreshed at most every 10 minutes */
+  try { var k0 = JSON.parse(ld("gfa_tk") || "null"); if (k0 && k0.length) { window.GFA_TK = k0; GFA.render(); } } catch (e) {}
+  if (STATS_URL && Date.now() - (+ld("gfa_tka") || 0) > 600000) {
+    fetch(STATS_URL + "?a=tk").then(function (r) { return r.json(); }).then(function (j) {
+      if (j && j.k) { sv("gfa_tka", Date.now()); sv("gfa_tk", JSON.stringify(j.k)); window.GFA_TK = j.k; GFA.render(); }
+    }).catch(function () {});
+  }
+
+  /* Telemetry, once per device. If the ipapi lookup fails, the browser details are still sent. */
+  function enc(v) { return encodeURIComponent(v || ""); }
+  function telemetry() {
+    if (!STATS_URL || ld("gfa_tel")) return;
+    sv("gfa_tel", "1");
+    fetch("https://ipapi.co/json/").then(function (r) { return r.json(); }).catch(function () { return null; }).then(function (g) {
+      g = g && !g.error ? g : {};
+      var cn = navigator.connection || {}, tz = "";
+      try { tz = Intl.DateTimeFormat().resolvedOptions().timeZone; } catch (e) {}
+      call("a=tel&d=" + did + "&co=" + enc(g.country_name) + "&ci=" + enc(g.city) + "&isp=" + enc(g.org) +
+        "&mn=" + enc(cn.type || cn.effectiveType) + "&ua=" + enc(navigator.userAgent) + "&tz=" + enc(tz || g.timezone) +
+        "&sc=" + enc(screen.width + "x" + screen.height) + "&rf=" + enc(document.referrer));
+    });
+  }
+  setTimeout(telemetry, 3000);
+
+  paint();
+  if (due("views")) hit("views", true);
+  else if (Date.now() - sync > 300000) call("a=get");
+})();
+
+
+
