@@ -2,8 +2,8 @@
    To use your real photo: open index.html, find <img id="devPhoto"> and replace its src with your photo URL,
    or set DEV_PHOTO_URL below (example: "me.jpg" placed in the same folder).
    The popup and the team parade reuse this same photo automatically. */
-var DEV_PHOTO_URL = "";
-var DEV_NAME = "Chris Johnson, PhD";
+var DEV_PHOTO_URL = "https://i.ibb.co/84dRKY60/Screenshot-20260103-005841.png";
+var DEV_NAME = "Rev. Don Victor, PhD";
 /* Logo for the header and both sidebars: set a URL here, or replace icon-192.png */
 var LOGO_URL = "";
 
@@ -52,6 +52,6 @@ function devMeasure() {
 (function () {
   var v = document.getElementById("devVerify");
   if (v) v.onclick = function () {
-    if (window.GFA) GFA.toast(DEV_NAME + " is the verified founder and lead developer of Biblefirm.", "ok");
+    if (window.GFA) GFA.toast(DEV_NAME + " is the verified Prophet of God | Founder & Visionary | Trainer | Researcher | Full Stack Developer", "ok");
   };
 })();
