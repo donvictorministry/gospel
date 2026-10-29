@@ -27,7 +27,7 @@ var TEAM = [
   /* Team modal */
   var cards = "";
   TEAM.forEach(function (m, i) {
-    cards += '<div class="tc' + (i < 3 ? " tcp" : "") + '">' + (i < 3 ? '<span class="tcb">Core Team</span>' : "") + '<img class="tp" src="' + src(m) + '" width="150" height="150" alt="' + m.name + '">' +
+    cards += '<div class="tc' + (i < 3 ? " tcp" : "") + '">' + (i < 3 ? '<span class="tcb">Director</span>' : "") + '<img class="tp" src="' + src(m) + '" width="150" height="150" alt="' + m.name + '">' +
       '<div class="tn2">' + m.name + '</div><div class="tr">' + m.role + '</div><p class="tbio clamp">' + m.bio.replace(/([.!?]) +/g, "$1\n") + '</p><button class="tg tgm" hidden></button></div>';
   });
   var sec = document.createElement("section");
