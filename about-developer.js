@@ -14,11 +14,10 @@ function devLabel() {
   if (b && m) m.textContent = b.classList.contains("clamp") ? (L.showMore || T.en.showMore) : (L.showLess || T.en.showLess);
 }
 
-var HL = ["digital technology ministry", "Progressive Web Apps", "six million souls", "six continents", "Android phones", "Biblefirm"];
 function hl(s) {
-  s = s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-  HL.forEach(function (k) { s = s.split(k).join("<mark>" + k + "</mark>"); });
-  return s;
+  return s.split("\n").map(function (l, i) {
+    return '<b class="vn">' + (i + 1) + "</b> " + l.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  }).join("\n");
 }
 
 function renderDev(t) {
