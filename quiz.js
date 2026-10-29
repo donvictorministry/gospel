@@ -20,7 +20,7 @@
   var html = "";
   if (game) html += btn("btnGame", "var(--p)", "i-game", "JESUS Slide Puzzle", "Slide the tiles to spell JESUS");
   series.forEach(function (s, i) {
-    html += btn("btnS" + i, colors[i % colors.length], icons[i % icons.length], "Bible Trivia: " + s.title, s.subtitle + " (" + s.questions.length + " questions)");
+    html += btn("btnS" + i, colors[i % colors.length], icons[i % icons.length], "Bible Quiz: " + s.title, s.subtitle + " (" + s.questions.length + " questions)");
   });
   page.innerHTML = '<div class="pgi"><div class="mhd" data-i="navMore"></div><p class="mps" data-i="moreSub"></p><div class="mbs">' + html + '</div></div>';
 
@@ -81,18 +81,52 @@
   $("qPx").onclick = popClose;
   $("qBack").onclick = function () { popClose(); GFA.close(); };
 
+  function finish(n, b) {
+    var t = window.Badge ? Badge.tierFor(score, n) : null, saved = "";
+    try { saved = localStorage.getItem("gfa_name") || ""; } catch (e) {}
+    var msg = score === n ? "Hallelujah! Perfect score!" : t ? "Praise God! Great job!" : "Well done! Keep growing!";
+    b.innerHTML = '<div class="qr"><div class="qsc">' + score + ' / ' + n + '</div><p class="qq jub">' + msg + '</p>' +
+      (t ? '<p class="mp">You earned the <b>' + t.name + '</b>! Enter your name, then download or share it.</p>' +
+        '<img class="qprev" id="qPrev" alt="Your badge"><input class="qin" id="qName" type="text" maxlength="40" placeholder="Your full name" autocomplete="off" value="' + esc(saved) + '">' +
+        '<div class="stack"><button class="btn" id="qDl"><svg class="ic"><use href="#i-dl"/></svg><span>Download Badge</span></button>' +
+        '<button class="btn tn" id="qSh"><svg class="ic"><use href="#i-share"/></svg><span>Share Badge</span></button></div>'
+        : '<p class="mp">Score 8 out of 12 or more to earn a badge. You can do it, try again!</p>') +
+      '<p class="mp">' + esc(cur.reflection) + '</p>' +
+      '<div class="stack"><button class="btn alt" id="qAgain">Play again</button><button class="btn alt" id="qMore">Back to More</button></div></div>';
+    $("qAgain").onclick = function () { qi = 0; score = 0; if (window.Confetti) Confetti.stop(); draw(); };
+    $("qMore").onclick = GFA.close;
+    if (window.Confetti) Confetti.celebrate(t ? (t.key === "honor" ? 3 : t.key === "golden" ? 2 : 1) : 0);
+    if (!t) return;
+    function info(nm) {
+      return { name: nm, date: new Date().toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" }),
+        series: "Series " + cur.order + ": " + cur.title, score: score, n: n, url: Share.url() };
+    }
+    var pv = 0;
+    function prev() { $("qPrev").src = Badge.make(t, info($("qName").value.trim() || "Your Name")).toDataURL("image/jpeg", 0.85); }
+    function nameOk() {
+      var nm = $("qName").value.trim();
+      if (!nm) { GFA.toast("Please enter your name for the badge.", "err"); $("qName").focus(); return ""; }
+      try { localStorage.setItem("gfa_name", nm); } catch (e) {}
+      return nm;
+    }
+    prev();
+    $("qName").oninput = function () { clearTimeout(pv); pv = setTimeout(prev, 350); };
+    $("qDl").onclick = function () { var nm = nameOk(); if (nm) Badge.download(Badge.make(t, info(nm)), t.key); };
+    $("qSh").onclick = function () {
+      var nm = nameOk();
+      if (!nm) return;
+      Badge.make(t, info(nm)).toBlob(function (bl) {
+        Share.file(bl, "Bible-Quiz-" + t.key + "-badge.png", nm + " earned the " + t.name + " on the Bible Quiz!");
+      }, "image/png");
+    };
+  }
+
   function draw() {
     var n = cur.questions.length, b = $("qBody");
     locked = false;
     clearInterval(tm);
     $("qPop").classList.remove("show");
-    if (qi >= n) {
-      b.innerHTML = '<div class="qr"><div class="qsc">' + score + ' / ' + n + '</div><p class="qq">' + (score === n ? "Perfect score!" : "Well done!") + '</p><p class="mp">' + esc(cur.reflection) + '</p>' +
-        '<div class="stack"><button class="btn" id="qAgain">Play again</button><button class="btn alt" id="qMore">Back to More</button></div></div>';
-      $("qAgain").onclick = function () { qi = 0; score = 0; draw(); };
-      $("qMore").onclick = GFA.close;
-      return;
-    }
+    if (qi >= n) { finish(n, b); return; }
     var q = cur.questions[qi];
     b.innerHTML = '<div class="qp">Question ' + (qi + 1) + ' of ' + n + '</div><div class="qb"><i style="width:' + (qi / n * 100) + '%"></i></div>' +
       '<div class="qc">' + esc(q.cat) + '</div><p class="qq">' + esc(q.text) + '</p><div class="qos">' +
@@ -103,7 +137,7 @@
         if (locked) return;
         locked = true;
         var k = +el.getAttribute("data-k"), ok = k === q.correct;
-        if (ok) score++; else el.classList.add("no");
+        if (ok) { score++; if (window.Confetti) Confetti.burstFrom(el, 70); } else el.classList.add("no");
         b.querySelectorAll(".qo")[q.correct].classList.add("ok");
         popOpen(ok, q.verse);
       };
@@ -113,7 +147,7 @@
   series.forEach(function (s, i) {
     $("btnS" + i).onclick = function () {
       cur = s; qi = 0; score = 0;
-      $("qTitle").textContent = "Bible Trivia: " + s.title;
+      $("qTitle").textContent = "Bible Quiz: " + s.title;
       draw();
       GFA.open("mQuiz");
     };
