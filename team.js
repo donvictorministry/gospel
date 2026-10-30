@@ -25,16 +25,16 @@ var TEAM = [
   function src(m) { return m.photo || PH; }
 
   /* Team modal */
-  var VER = '<span class="vbd"><svg class="ic f"><use href="#i-verified"/></svg></span>';
   var dph = document.getElementById("devPhoto");
   var FOUNDER = '<div class="tc tcp"><span class="tcb">Founder &amp; Director</span>' +
     '<div class="dpw" style="--z:188px"><div class="ring"><span class="orb"><svg class="ic"><use href="#i-code"/></svg></span></div><div class="photo"><img src="' + (dph ? dph.src : PH) + '" alt="' + DEV_NAME + '"></div></div>' +
-    '<div class="tnr"><div class="tn2">' + DEV_NAME + '</div><button class="vbt" id="foundV" aria-label="Verified. Open About Developer"><svg class="ic f"><use href="#i-verified"/></svg></button></div>' +
-    '<div class="tr">' + T.en.devRole + '</div></div>';
+    '<div class="tn2">' + DEV_NAME + '</div>' +
+    '<div class="tr">' + T.en.devRole + '</div>' +
+    '<button class="vpill" id="foundV"><svg class="ic f"><use href="#i-verified"/></svg><span>Verified Developer</span></button></div>';
   var cards = FOUNDER;
   TEAM.forEach(function (m, i) {
     cards += '<div class="tc tcp">' + (i < 3 ? '<span class="tcb">Director</span>' : "") + '<img class="tp" src="' + src(m) + '" width="150" height="150" alt="' + m.name + '">' +
-      '<div class="tnr"><div class="tn2">' + m.name + '</div>' + VER + '</div><div class="tr">' + m.role + '</div><p class="tbio clamp">' + m.bio.replace(/([.!?]) +/g, "$1\n") + '</p><button class="tg tgm" hidden></button></div>';
+      '<div class="tn2">' + m.name + '</div><div class="tr">' + m.role + '</div><button class="vpill" data-m="' + i + '"><svg class="ic f"><use href="#i-verified"/></svg><span>' + (i < 3 ? "Verified Director" : "Verified Team") + '</span></button><p class="tbio clamp">' + m.bio.replace(/([.!?]) +/g, "$1\n") + '</p><button class="tg tgm" hidden></button></div>';
   });
   var sec = document.createElement("section");
   sec.className = "modal tm";
@@ -49,6 +49,12 @@ var TEAM = [
   GFA.render();
 
   var tl = document.getElementById("tl");
+  tl.addEventListener("click", function (e) {
+    var v = e.target.closest(".vpill");
+    if (!v || v.id === "foundV") return;
+    var k = +v.getAttribute("data-m"), m = TEAM[k];
+    GFA.toast(m.name + (k < 3 ? " is a verified Director of Biblefirm. " : " is a verified member of the Biblefirm team. ") + m.role + ".", "ok", 5000);
+  });
   window.teamMeasure = function () {
     tl.querySelectorAll(".tbio").forEach(function (p) {
       p.classList.add("clamp");
