@@ -3,7 +3,7 @@ var CACHE = "gospel-for-all-v11.2";
 var FILES = [
   "./", "index.html", "styles.css", "app.js", "verse.js", "translation.js",
   "about-developer.js", "popup.js", "team.js", "stats.js", "game.js", "series1.js", "series2.js", "quiz.js", "confetti.js", "badge.js", "share.js", "proprietary-notice.js", "block-computer.js", "manifest.json",
-  "icon-192.png", "icon-512.png", "og-image.png"
+  "icon-192.png", "icon-512.png", "og-image.png", "dvg-logo-pic.png", "joy-pic.png", "mike-pastor-pic.png", "no-1-dvm-logo.png", "pastor-kalu.png", "pastor-vani-photo.jpg", "sis-irene.png", "amb-pic.png"
 ];
 
 self.addEventListener("install", function (e) {
