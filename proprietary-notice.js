@@ -1,14 +1,14 @@
-/* proprietary-notice.js: "Proprietary Software Notification" page (left sidebar > Proprietary Notice).
-   Edit the text below. The page opens from the sidebar and its X returns to the sidebar. */
+/* proprietary-notice.js: "Proprietary Software Notification */
+
 var PROP_NOTICE = {
   title: "Proprietary Software Notification",
   head: "IMPORTANT NOTICE",
   paragraphs: [
-    "This is a proprietary software product developed exclusively by Rev. Dr. Chris Johnson, PhD and DV Biblefirm.",
-    "You are authorized to use this application for personal and ministry purposes only. Any unauthorized reproduction, distribution, or modification of this application is strictly prohibited and constitutes a violation of intellectual property law.",
-    "DV Biblefirm actively monitors for unauthorized use and will take appropriate legal action where necessary."
+    "This is a proprietary software product developed exclusively by Rev. Don Victor, PhD",
+    "You are authorized to use this application for personal purposes only. Any unauthorized reproduction, distribution, or modification of this application is strictly prohibited and constitutes a violation of intellectual property law.",
+    "Dr. Don Victor, DV Network Engine, actively monitors, detects, and safeguards against unauthorized access, modification, and unlawful tampering. Any infringement, misuse, or attempt to compromise the integrity of this application may result in appropriate legal action and other remedies available under applicable laws.",
   ],
-  thanks: "Thank you for respecting the work and ministry behind this application."
+  thanks: "Thank you for respecting the work and ministry behind this application.",
 };
 
 (function () {
