@@ -1,6 +1,6 @@
 /* Developer modal data. */
 var DEV_PHOTO_URL = "https://app.donvictorministry.org.ng/gospel/dvg-logo-pic.png";
-var DEV_NAME = "Rev. Don Victor, PhD";
+var DEV_NAME = "Rev Don Victor, PhD";
 var LOGO_URL = "https://app.donvictorministry.org.ng/gospel/no-1-dvm-logo.png";
 var SIDEBAR_LOGO_URL = "https://app.donvictorministry.org.ng/gospel/no-1-dvm-logo.png";
 
@@ -50,6 +50,6 @@ function devMeasure() {
 (function () {
   var v = document.getElementById("devVerify");
   if (v) v.onclick = function () {
-    if (window.GFA) GFA.toast(DEV_NAME + " is the verified founder and lead developer Don Victor Ministries Global.", "ok", 5000);
+    if (window.GFA) GFA.toast(DEV_NAME + " is the verified founder, Don Victor Ministries Global.", "ok", 5000);
   };
 })();
