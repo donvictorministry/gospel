@@ -643,7 +643,7 @@
 
   <!-- CHROME -->
   <div class="dvg-chrome">
-    <div class="dvg-chrome-title">&#169; Rev. Chris Johnson</div>
+    <div class="dvg-chrome-title">&#169; Rev. Don Victor, PhD</div>
     <div class="dvg-btns">
       <button class="dvg-btn on" id="dvg-snd" aria-label="Sound">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg>
@@ -768,7 +768,7 @@
 
       <!-- content -->
       <div class="dvg-cert-content">
-        <div class="dvg-cert-ministry" id="dvg-cert-ministry">Biblefirm</div>
+        <div class="dvg-cert-ministry" id="dvg-cert-ministry">Don Victor Ministries</div>
         <div class="dvg-cert-h1">Certificate of Faith</div>
         <div class="dvg-cert-rule-dbl"></div>
         <div class="dvg-cert-presented">This certificate is proudly presented to</div>
@@ -777,7 +777,7 @@
         <div class="dvg-cert-achievement">For completing the <strong>JESUS Slide Puzzle</strong> and earning the faith badge of</div>
         <div class="dvg-cert-badge-label" id="dvg-cert-badge">Believer</div>
         <div class="dvg-cert-rule"></div>
-        <div class="dvg-cert-issuer" id="dvg-cert-issuer">Presented by: Rev. Chris Johnson, PhD</div>
+        <div class="dvg-cert-issuer" id="dvg-cert-issuer">Presented by: Rev. Don Victor, PhD</div>
         <div class="dvg-cert-date" id="dvg-cert-date"></div>
       </div>
 
@@ -840,11 +840,11 @@
     BASE_SWAPS:   100,
     SWAPS_STEP:   60,
     APP_URL:      window.location.href,
-    MINISTRY:     'Biblefirm',
-    ISSUER:       'Chris Johnson, PhD',
-    WHATSAPP:     '',
-    EMAIL:        '',
-    ORG_SHORT:    'Biblefirm'
+    MINISTRY:     'Don Victor Ministries',
+    ISSUER:       'Rev. Don Victor, PhD',
+    WHATSAPP:     '2348086590253',
+    EMAIL:        'donvictorministry@gmail.com',
+    ORG_SHORT:    'Don Victor Ministries'
   };
 
   var BADGES = [
