@@ -4,6 +4,100 @@
   var page = document.getElementById("pQuiz");
   if (!page || window.BLOCKED || !window.GFA) return;
   var $ = function (i) { return document.getElementById(i); };
+
+  /* BADGE LAYOUT: clean app link (no index.html) and a ministry logo that measures 140px on a phone screen (420px on the badge) */
+  Share.url = function () { return location.origin + location.pathname.replace(/index\.html$/i, ""); };
+  if (window.Badge) (function () {
+    var FONT = "'Plus Jakarta Sans', Roboto, sans-serif", logo = null;
+    if (Badge.CFG.logo) {
+      var im = new Image();
+      im.crossOrigin = "anonymous";
+      im.onload = function () { logo = im; };
+      im.src = Badge.CFG.logo;
+    }
+    function rr(c, x, y, w, h, r) {
+      c.beginPath(); c.moveTo(x + r, y); c.arcTo(x + w, y, x + w, y + h, r); c.arcTo(x + w, y + h, x, y + h, r);
+      c.arcTo(x, y + h, x, y, r); c.arcTo(x, y, x + w, y, r); c.closePath();
+    }
+    function wrap(c, text, x, y, maxW, lh) {
+      var line = "";
+      text.split(" ").forEach(function (w) {
+        var t = line ? line + " " + w : w;
+        if (c.measureText(t).width > maxW && line) { c.fillText(line, x, y); line = w; y += lh; } else line = t;
+      });
+      c.fillText(line, x, y);
+      return y;
+    }
+    function fit(c, text, weight, size, maxW) {
+      while (size > 24) { c.font = weight + " " + size + "px " + FONT; if (c.measureText(text).width <= maxW) break; size -= 2; }
+      return size;
+    }
+    Badge.make = function (t, info) {
+      var W = 1080, H = 1650, cv = document.createElement("canvas"), c, sz;
+      cv.width = W; cv.height = H; c = cv.getContext("2d");
+      var g = c.createLinearGradient(0, 0, W, H); g.addColorStop(0, t.c1); g.addColorStop(1, t.c2);
+      c.fillStyle = g; c.fillRect(0, 0, W, H);
+      c.fillStyle = "#FFFFFF"; c.globalAlpha = 0.14;
+      c.beginPath(); c.arc(W, 0, 380, 0, 7); c.fill(); c.beginPath(); c.arc(0, H, 320, 0, 7); c.fill();
+      c.globalAlpha = 0.55; c.strokeStyle = t.ink; c.lineWidth = 6; rr(c, 40, 40, W - 80, H - 80, 36); c.stroke();
+      c.lineWidth = 2; rr(c, 62, 62, W - 124, H - 124, 26); c.stroke(); c.globalAlpha = 1;
+
+      c.textAlign = "center"; c.fillStyle = t.ink;
+      if ("letterSpacing" in c) c.letterSpacing = "6px";
+      c.font = "800 46px " + FONT; c.fillText(Badge.CFG.ministry.toUpperCase(), W / 2, 140);
+      c.font = "600 32px " + FONT; c.fillText("BIBLE QUIZ", W / 2, 192);
+      if ("letterSpacing" in c) c.letterSpacing = "2px";
+      c.font = "800 80px " + FONT; c.fillText(t.name.toUpperCase(), W / 2, 300);
+      if ("letterSpacing" in c) c.letterSpacing = "0px";
+      c.font = "600 34px " + FONT; c.fillText(info.series, W / 2, 358);
+
+      /* ministry logo: 420px circle = 140px on a 360px-wide phone screen */
+      var cx = W / 2, cy = 650, R = 210;
+      c.globalAlpha = 0.28; c.fillStyle = t.ink; c.beginPath(); c.arc(cx, cy, R + 26, 0, 7); c.fill(); c.globalAlpha = 1;
+      c.fillStyle = "#FFFFFF"; c.beginPath(); c.arc(cx, cy, R + 12, 0, 7); c.fill();
+      if (logo) {
+        c.save(); c.beginPath(); c.arc(cx, cy, R, 0, 7); c.clip();
+        c.drawImage(logo, cx - R, cy - R, R * 2, R * 2); c.restore();
+      } else {
+        c.fillStyle = t.accent; c.fillRect(cx - 24, cy - 110, 48, 220); c.fillRect(cx - 80, cy - 60, 160, 44);
+      }
+      c.lineWidth = 10; c.strokeStyle = t.ink; c.beginPath(); c.arc(cx, cy, R, 0, 7); c.stroke();
+
+      c.fillStyle = t.ink;
+      c.font = "800 56px " + FONT; c.fillText("Score " + info.score + "/" + info.n, W / 2, 975);
+      c.font = "italic 500 36px " + FONT; c.fillText("Awarded to", W / 2, 1045);
+      sz = fit(c, info.name, "800", 88, 880);
+      c.font = "800 " + sz + "px " + FONT; c.fillText(info.name, W / 2, 1135);
+
+      c.font = "italic 500 38px " + FONT;
+      var y = wrap(c, "\u201C" + t.verse[0] + "\u201D", W / 2, 1215, 860, 52);
+      c.font = "700 32px " + FONT; c.fillText("\u2014 " + t.verse[1], W / 2, y + 52);
+
+      c.textAlign = "left"; c.font = "600 26px " + FONT; c.fillText("DATE ISSUED", 110, 1395);
+      c.font = "700 32px " + FONT; c.fillText(info.date, 110, 1439);
+      c.textAlign = "right"; c.font = "600 26px " + FONT; c.fillText("PRESIDENT", W - 110, 1395);
+      sz = fit(c, Badge.CFG.president, "700", 32, 470);
+      c.font = "700 " + sz + "px " + FONT; c.fillText(Badge.CFG.president, W - 110, 1439);
+
+      /* app link: its own room below the divider, inside the frame */
+      c.globalAlpha = 0.4; c.fillStyle = t.ink; c.fillRect(W / 2 - 340, 1480, 680, 3); c.globalAlpha = 1;
+      c.textAlign = "center";
+      sz = 40;
+      while (sz > 30) { c.font = "700 " + sz + "px " + FONT; if (c.measureText(info.url).width <= 880) break; sz -= 2; }
+      c.font = "700 " + sz + "px " + FONT;
+      if (c.measureText(info.url).width <= 880) c.fillText(info.url, W / 2, 1545);
+      else {
+        var mid = Math.floor(info.url.length / 2), cut = info.url.lastIndexOf("/", mid);
+        if (cut < 9) cut = mid;
+        c.font = "700 34px " + FONT;
+        c.fillText(info.url.slice(0, cut + 1), W / 2, 1535);
+        c.fillText(info.url.slice(cut + 1), W / 2, 1577);
+      }
+      return cv;
+    };
+  })();
+  /* END BADGE LAYOUT */
+
   function esc(s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
 
   var SER = window.TRIVIA_SERIES || {};
