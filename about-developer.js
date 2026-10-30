@@ -2,10 +2,12 @@
    To use your real photo: open index.html, find <img id="devPhoto"> and replace its src with your photo URL,
    or set DEV_PHOTO_URL below (example: "me.jpg" placed in the same folder).
    The popup and the team parade reuse this same photo automatically. */
-var DEV_PHOTO_URL = "https://i.ibb.co/84dRKY60/Screenshot-20260103-005841.png";
-var DEV_NAME = "Rev. Don Victor, PhD";
+var DEV_PHOTO_URL = "";
+var DEV_NAME = "Chris Johnson, PhD";
 /* Logo for the header and both sidebars: set a URL here, or replace icon-192.png */
 var LOGO_URL = "";
+/* Logo for the two sidebars (140px): set a URL here, or change the src of the <img class="li"> tags in the sidebars of index.html */
+var SIDEBAR_LOGO_URL = "";
 
 function devLabel() {
   var L = T.en;
@@ -26,6 +28,7 @@ function renderDev(t) {
   var p = document.getElementById("devPhoto");
   if (p && DEV_PHOTO_URL) p.src = DEV_PHOTO_URL;
   if (LOGO_URL) document.querySelectorAll(".li").forEach(function (i) { i.src = LOGO_URL; });
+  if (SIDEBAR_LOGO_URL) document.querySelectorAll(".dh .li").forEach(function (i) { i.src = SIDEBAR_LOGO_URL; });
   var b = document.getElementById("devBio");
   if (b) b.innerHTML = hl(T.en.devBio + "\n" + T.en.devMore.join("\n"));
   devLabel();
@@ -52,6 +55,6 @@ function devMeasure() {
 (function () {
   var v = document.getElementById("devVerify");
   if (v) v.onclick = function () {
-    if (window.GFA) GFA.toast(DEV_NAME + " is the verified Prophet of God | Founder & Visionary | Trainer | Researcher | Full Stack Developer", "ok");
+    if (window.GFA) GFA.toast(DEV_NAME + " is the verified founder and lead developer of Biblefirm.", "ok");
   };
 })();
