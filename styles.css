@@ -69,7 +69,7 @@ select{width:100%;height:56px;padding:0 16px;border:1px solid var(--ol);border-r
 .chips span{font-size:20px;padding:6px 14px;border-radius:10px;background:var(--s);color:var(--osv);border:1px solid var(--ol)}
 
 /* Developer bio */
-.db{white-space:pre-line;text-align: center}
+.db{white-space:pre-line;text-align:left}
 .db.clamp{display:-webkit-box;-webkit-line-clamp:5;-webkit-box-orient:vertical;overflow:hidden}
 .tg{align-self:center;margin-top:8px;height:48px;padding:0 20px;border-radius:24px;color:var(--pt);font-weight:500;position:relative;overflow:hidden}
 .tg[hidden]{display:none}
@@ -323,3 +323,18 @@ mark{background:var(--pc);color:var(--opc);padding:0 6px;border-radius:6px;font-
 .qprev{width:62%;align-self:center;border-radius:16px;box-shadow:0 6px 18px rgba(0,0,0,.3);margin:6px 0}
 .qin{width:100%;height:56px;padding:0 18px;border:2px solid var(--os);border-radius:28px;background:var(--s);color:var(--os);font-size:20px;text-align:center;margin:6px 0}
 .qr .stack{margin-top:6px}
+
+/* ===== v8: sidebar arrow beside the logo, 140px sidebar logos, no-scroll "Why I Built This", identical team cards ===== */
+.dh{position:relative}
+.lg.big{--z:140px}
+.dbk{top:82px;left:12px}
+.pc{overflow:hidden;padding:18px 18px 14px;gap:6px}
+.pc .dpw{margin-top:2px}
+.pn{font-size:22px}
+.ptx{flex:1 1 230px;min-height:0;overflow:hidden;font-size:20px;line-height:1.45;padding:4px 2px}
+.dots{margin:2px 0 4px}
+.pc .btn{min-height:52px;flex:none}
+.tnr{display:flex;align-items:center;justify-content:center;gap:8px}
+.vbd,.vbt{display:flex;align-items:center;justify-content:center;flex:none}
+.vbt{width:40px;height:40px;border-radius:20px;position:relative;overflow:hidden}
+.vbd .ic,.vbt .ic{width:28px;height:28px;color:var(--p)}
