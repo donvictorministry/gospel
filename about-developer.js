@@ -50,6 +50,6 @@ function devMeasure() {
 (function () {
   var v = document.getElementById("devVerify");
   if (v) v.onclick = function () {
-    if (window.GFA) GFA.toast(DEV_NAME + " is the verified founder and lead developer of Don Victor Ministries Global.", "ok", 5000);
+    if (window.GFA) GFA.toast(DEV_NAME + " is the verified founder and lead developer Don Victor Ministries Global.", "ok", 5000);
   };
 })();
