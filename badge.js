@@ -1,7 +1,16 @@
 /* badge.js: Honor (12/12), Golden (10/12) and Silver (8/12) badges. Shown only at the end of a quiz.
    Each badge shows: ministry name, user name, date issued, president name, app URL and a line of verse. */
 var Badge = (function () {
-  var CFG = { ministry: "Biblefirm", president: "Rev. Dr. Chris Johnson, PhD" };
+  var CFG = { ministry: "Biblefirm", president: "Rev. Dr. Chris Johnson, PhD",
+    logo: "icon-192.png" };   /* ministry logo: replace with your logo URL (a file in the same folder works best) */
+  var LOGO = null;
+  (function () {
+    if (!CFG.logo) return;
+    var im = new Image();
+    im.crossOrigin = "anonymous";
+    im.onload = function () { LOGO = im; };
+    im.src = CFG.logo;
+  })();
   var FONT = "'Plus Jakarta Sans', Roboto, sans-serif";
   var TIERS = [
     { key: "honor", name: "Honor Badge", min: 1, c1: "#DF1E5A", c2: "#6B0C2B", ink: "#FFFFFF", accent: "#DF1E5A",
@@ -37,7 +46,7 @@ var Badge = (function () {
 
   /* info: { name, date, series, score, n, url } */
   function make(t, info) {
-    var W = 1080, H = 1350, cv = document.createElement("canvas"), c;
+    var W = 1080, H = 1355, cv = document.createElement("canvas"), c;
     cv.width = W; cv.height = H; c = cv.getContext("2d");
     var g = c.createLinearGradient(0, 0, W, H); g.addColorStop(0, t.c1); g.addColorStop(1, t.c2);
     c.fillStyle = g; c.fillRect(0, 0, W, H);
@@ -48,44 +57,58 @@ var Badge = (function () {
 
     c.textAlign = "center"; c.fillStyle = t.ink;
     if ("letterSpacing" in c) c.letterSpacing = "6px";
-    c.font = "800 46px " + FONT; c.fillText(CFG.ministry.toUpperCase(), W / 2, 150);
-    c.font = "600 32px " + FONT; c.fillText("BIBLE QUIZ", W / 2, 205);
+    c.font = "800 46px " + FONT; c.fillText(CFG.ministry.toUpperCase(), W / 2, 140);
+    c.font = "600 32px " + FONT; c.fillText("BIBLE QUIZ", W / 2, 192);
     if ("letterSpacing" in c) c.letterSpacing = "2px";
-    c.font = "800 80px " + FONT; c.fillText(t.name.toUpperCase(), W / 2, 318);
+    c.font = "800 80px " + FONT; c.fillText(t.name.toUpperCase(), W / 2, 300);
     if ("letterSpacing" in c) c.letterSpacing = "0px";
-    c.font = "600 34px " + FONT; c.fillText(info.series, W / 2, 378);
+    c.font = "600 34px " + FONT; c.fillText(info.series, W / 2, 358);
 
-    /* medal */
-    var cx = W / 2, cy = 590;
-    c.globalAlpha = 0.28; c.fillStyle = t.ink; c.beginPath(); c.arc(cx, cy, 192, 0, 7); c.fill(); c.globalAlpha = 1;
-    var mg = c.createRadialGradient(cx - 50, cy - 60, 20, cx, cy, 170); mg.addColorStop(0, "#FFFFFF"); mg.addColorStop(1, t.c1);
-    c.fillStyle = mg; c.beginPath(); c.arc(cx, cy, 166, 0, 7); c.fill();
-    c.lineWidth = 8; c.strokeStyle = t.ink; c.stroke();
-    c.fillStyle = t.accent; c.fillRect(cx - 9, cy - 128, 18, 62); c.fillRect(cx - 28, cy - 112, 56, 16);
-    c.fillStyle = t.accent === "#DF1E5A" ? "#7A0F31" : t.ink;
-    c.font = "800 118px " + FONT; c.fillText(info.score + "/" + info.n, cx, cy + 50);
-    c.font = "700 30px " + FONT; c.fillText("SCORE", cx, cy + 106);
+    /* ministry logo circle: 140px */
+    var cx = W / 2, cy = 520;
+    c.globalAlpha = 0.28; c.fillStyle = t.ink; c.beginPath(); c.arc(cx, cy, 92, 0, 7); c.fill(); c.globalAlpha = 1;
+    c.fillStyle = "#FFFFFF"; c.beginPath(); c.arc(cx, cy, 78, 0, 7); c.fill();
+    if (LOGO) {
+      c.save(); c.beginPath(); c.arc(cx, cy, 70, 0, 7); c.clip();
+      c.drawImage(LOGO, cx - 70, cy - 70, 140, 140); c.restore();
+    } else {
+      c.fillStyle = t.accent; c.fillRect(cx - 9, cy - 40, 18, 80); c.fillRect(cx - 30, cy - 22, 60, 16);
+    }
+    c.lineWidth = 8; c.strokeStyle = t.ink; c.beginPath(); c.arc(cx, cy, 70, 0, 7); c.stroke();
 
-    /* user */
+    /* score and user */
     c.fillStyle = t.ink;
-    c.font = "italic 500 36px " + FONT; c.fillText("Awarded to", W / 2, 850);
+    c.font = "800 56px " + FONT; c.fillText("Score " + info.score + "/" + info.n, W / 2, 690);
+    c.font = "italic 500 36px " + FONT; c.fillText("Awarded to", W / 2, 765);
     var sz = fit(c, info.name, "800", 88, 880);
-    c.font = "800 " + sz + "px " + FONT; c.fillText(info.name, W / 2, 940);
+    c.font = "800 " + sz + "px " + FONT; c.fillText(info.name, W / 2, 855);
 
     /* verse */
     c.font = "italic 500 38px " + FONT;
-    var y = wrap(c, "\u201C" + t.verse[0] + "\u201D", W / 2, 1018, 860, 52);
+    var y = wrap(c, "\u201C" + t.verse[0] + "\u201D", W / 2, 935, 860, 52);
     c.font = "700 32px " + FONT; c.fillText("\u2014 " + t.verse[1], W / 2, y + 52);
 
-    /* date, president, url */
-    c.textAlign = "left"; c.font = "600 26px " + FONT; c.fillText("DATE ISSUED", 110, 1198);
-    c.font = "700 32px " + FONT; c.fillText(info.date, 110, 1242);
-    c.textAlign = "right"; c.font = "600 26px " + FONT; c.fillText("PRESIDENT", W - 110, 1198);
+    /* date and president */
+    c.textAlign = "left"; c.font = "600 26px " + FONT; c.fillText("DATE ISSUED", 110, 1112);
+    c.font = "700 32px " + FONT; c.fillText(info.date, 110, 1156);
+    c.textAlign = "right"; c.font = "600 26px " + FONT; c.fillText("PRESIDENT", W - 110, 1112);
     sz = fit(c, CFG.president, "700", 32, 470);
-    c.font = "700 " + sz + "px " + FONT; c.fillText(CFG.president, W - 110, 1242);
+    c.font = "700 " + sz + "px " + FONT; c.fillText(CFG.president, W - 110, 1156);
+
+    /* app URL: larger, fully inside the frame (two lines if it is long) */
+    c.globalAlpha = 0.4; c.fillStyle = t.ink; c.fillRect(W / 2 - 340, 1192, 680, 3); c.globalAlpha = 1;
     c.textAlign = "center";
-    sz = fit(c, info.url, "600", 30, 860);
-    c.font = "600 " + sz + "px " + FONT; c.fillText(info.url, W / 2, 1302);
+    var us = 38;
+    while (us > 30) { c.font = "700 " + us + "px " + FONT; if (c.measureText(info.url).width <= 880) break; us -= 2; }
+    c.font = "700 " + us + "px " + FONT;
+    if (c.measureText(info.url).width <= 880) c.fillText(info.url, W / 2, 1246);
+    else {
+      var mid = Math.floor(info.url.length / 2), cut = info.url.lastIndexOf("/", mid);
+      if (cut < 9) cut = mid;
+      c.font = "700 32px " + FONT;
+      c.fillText(info.url.slice(0, cut + 1), W / 2, 1236);
+      c.fillText(info.url.slice(cut + 1), W / 2, 1274);
+    }
     return cv;
   }
 
