@@ -1,21 +1,21 @@
-/* team.js: ministry team data, team modal, and the occasional photo parade.
-   EDIT THE TEAM ARRAY BELOW: put each member's real name, role, short tag, photo URL and bio.
-   Leave photo as "" to keep the placeholder. */
+
+
+
 var TEAM = [
-  { name: "Team Member 1", tag: "Prayer", role: "Prayer and Intercession Lead", photo: "",
-    bio: "Leads daily prayer for every outreach, app release and partner church. Gathers prayer requests from the community and brings them before God each morning. Hosts weekly online prayer across time zones." },
-  { name: "Team Member 2", tag: "Scripture", role: "Scripture and Content Editor", photo: "",
-    bio: "Reviews every verse, devotional and message before it is published. Makes sure the Word is handled faithfully and clearly. Keeps the content simple enough for a new believer and deep enough to grow on." },
-  { name: "Team Member 3", tag: "Translation", role: "Translation Lead", photo: "",
-    bio: "Coordinates the translations for every language in the app, including Hausa, Yoruba and Igbo. Works with native speakers to proofread each text so that the Gospel is heard in the heart language of every reader." },
-  { name: "Team Member 4", tag: "Community", role: "Community Manager", photo: "",
-    bio: "Cares for the WhatsApp community and welcomes every new member. Answers questions, shares testimonies and celebrates each person who shares the app. Keeps the community warm, safe and encouraging." },
-  { name: "Team Member 5", tag: "Media", role: "Media and Design Lead", photo: "",
-    bio: "Creates the verse cards, graphics and short videos that carry the message across social media. Keeps the look of every app clean, simple and beautiful, so the focus always stays on Jesus and His Word." },
+  { name: "Amb. David Etim", tag: "Director", role: "Co Founder | Director | Senior Administrator", photo: "https://i.ibb.co/0RvC1sCc/Screenshot-20260214-191218.png",
+    bio: "Amb. David is a worship leader and professional instrumentalist who has impacted thousands of lives across different nations through his live worship performances and numerous gospel albums. He is the Co-Founder, Director, and Senior Administrator of Don Victor Ministries, working closely with the Founder to strengthen the ministry’s operations and advance its global vision with integrity, unity, and excellence." },
+  { name: "Pastor Vani Aldianto", tag: "Snr. Administrator", role: "Director | Senior Administrator", photo: "https://i.ibb.co/mFB1PT8d/Screenshot-20260214-221053.png",
+    bio: "Brother Aldianto is a devoted, mission driven leader with a deep passion to see the gospel sent to the nations. As an ordained minister serving faithfully on the frontline. He serves as Senior Administrator of Don Victor Ministries, providing strategic oversight and coordinating the administrative structure of the online community." },
+  { name: "Mrs. Irene Sayomi", tag: "Administrator", role: "Senior Administrator | Counselor", photo: "https://i.ibb.co/mVcxV1vq/Screenshot-20260214-210220.png",
+    bio: "Mrs. Irene is a devoted child of God with a heart for souls and a deep passion for global evangelism. As Administrator of Don Victor Ministries, she serves with love, faithfulness, and dedication, providing steadfast support to the ministry and helping advance its vision of reaching nations with the gospel of Jesus Christ." },
+  { name: "Pastor Michael Agwara, BSc", tag: "Administrator", role: "Administrator | Leader", photo: "https://i.ibb.co/jZDYsRNZ/Screenshot-20260214-191142.png",
+    bio: "Pastor Agwara  is a passionate servant of God, devoted soul winner, and dynamic public speaker with a passion for business and the gospel. He is the founder of De Michael Design, and serves as an Administrator of the Don Victor Ministries Online Community, contributing to its growth and effectiveness." },
+  { name: "Apostle Joseph Kalu", tag: "Administrator", role: "Administrator", photo: "https://i.ibb.co/qL9s994f/Screenshot-20260821-074554.png",
+    bio: "Pastor Kalu is a dedicated minister of the gospel, passionate about sound doctrine, biblical teaching, and evangelism. He uses drama to communicate the message of salvation and serves as an Administrator of the Don Victor Ministries Online Community, contributing to the advancement of the gospel." },
   { name: "Team Member 6", tag: "Outreach", role: "Outreach Coordinator", photo: "",
     bio: "Builds partnerships with churches, campuses and ministries on all six continents. Plans outreach campaigns, trains local volunteers and tracks how far the Gospel is spreading, one share at a time." },
-  { name: "Team Member 7", tag: "Support", role: "Technical Support Lead", photo: "",
-    bio: "Helps users install and use the app, even on low-cost Android phones with weak internet. Tests every release, fixes problems fast and makes sure nobody is left behind because of technology." }
+  { name: "Mrs. Joy Don Victor", tag: "Director", role: "Director of Women Affairs", photo: "https://i.ibb.co/5XG7cCJn/Screenshot-20260214-190308.png",
+    bio: "Mrs. Joy serves as the Director of Women Affairs at Don Victor Ministries, providing dedicated support to the ministry’s leadership. Through her prayers, wisdom, and commitment, she contributes to strengthening the ministry and advancing its global evangelistic vision." }
 ];
 
 (function () {
