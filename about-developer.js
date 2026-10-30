@@ -1,13 +1,8 @@
-/* Developer modal data.
-   To use your real photo: open index.html, find <img id="devPhoto"> and replace its src with your photo URL,
-   or set DEV_PHOTO_URL below (example: "me.jpg" placed in the same folder).
-   The popup and the team parade reuse this same photo automatically. */
-var DEV_PHOTO_URL = "";
-var DEV_NAME = "Chris Johnson, PhD";
-/* Logo for the header and both sidebars: set a URL here, or replace icon-192.png */
-var LOGO_URL = "";
-/* Logo for the two sidebars (140px): set a URL here, or change the src of the <img class="li"> tags in the sidebars of index.html */
-var SIDEBAR_LOGO_URL = "";
+/* Developer modal data. */
+var DEV_PHOTO_URL = "https://app.donvictorministry.org.ng/gospel/dvg-logo-pic.png";
+var DEV_NAME = "Rev. Don Victor, PhD";
+var LOGO_URL = "https://app.donvictorministry.org.ng/gospel/no-1-dvm-logo.png";
+var SIDEBAR_LOGO_URL = "https://app.donvictorministry.org.ng/gospel/no-1-dvm-logo.png";
 
 function devLabel() {
   var L = T.en;
@@ -55,6 +50,6 @@ function devMeasure() {
 (function () {
   var v = document.getElementById("devVerify");
   if (v) v.onclick = function () {
-    if (window.GFA) GFA.toast(DEV_NAME + " is the verified founder and lead developer of Biblefirm.", "ok", 5000);
+    if (window.GFA) GFA.toast(DEV_NAME + " is the verified founder and lead developer of Don Victor Ministries Global.", "ok", 5000);
   };
 })();
