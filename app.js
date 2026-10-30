@@ -19,13 +19,13 @@
   var nav = (navigator.language || "en").slice(0, 2).toLowerCase();
   lang = (saved && LANGS[saved]) ? saved : (LANGS[nav] ? nav : "en");
 
-  function toast(msg, kind) {
+  function toast(msg, kind, ms) {
     $("toastMsg").textContent = msg;
     $("toastIco").className = "ali " + (kind || "");
     $("toastUse").setAttribute("href", kind === "ok" ? "#i-check" : kind === "err" ? "#i-x" : "#i-info");
     $("toast").classList.add("show");
     clearTimeout(tt);
-    tt = setTimeout(function () { $("toast").classList.remove("show"); }, 2600);
+    tt = setTimeout(function () { $("toast").classList.remove("show"); }, ms || 2600);
   }
   $("toast").onclick = function () { $("toast").classList.remove("show"); };
 
