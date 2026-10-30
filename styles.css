@@ -345,3 +345,14 @@ mark{background:var(--pc);color:var(--opc);padding:0 6px;border-radius:6px;font-
 .vpill .ic{width:26px;height:26px;color:var(--p)}
 .vpill::after{content:"";position:absolute;left:0;top:0;right:0;bottom:0;background:var(--pr);opacity:0;transition:opacity .15s}
 .vpill:active::after{opacity:1}
+
+/* ===== v10: team page uses the whole screen (no wasted bottom space); each card can be seen fully ===== */
+.tm{padding-bottom:calc(env(safe-area-inset-bottom,0px) + 8px)}
+.tm::after{display:none}
+.tm .mh h2{font-size:21px;line-height:1.2}
+.tm .mh .x{width:44px;height:44px}
+.tl{scroll-snap-type:y proximity;padding:4px 0 8px}
+.tl>.tc{scroll-snap-align:start}
+
+/* ===== v11: jump-up arrow floats at the bottom far right (no wasted row) ===== */
+.tfab{position:absolute;right:16px;bottom:calc(env(safe-area-inset-bottom,0px) + 16px);width:52px;height:52px;border-radius:26px;background:var(--pc);color:var(--opc);box-shadow:0 4px 12px rgba(0,0,0,.3);z-index:6}
