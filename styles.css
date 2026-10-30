@@ -69,7 +69,7 @@ select{width:100%;height:56px;padding:0 16px;border:1px solid var(--ol);border-r
 .chips span{font-size:20px;padding:6px 14px;border-radius:10px;background:var(--s);color:var(--osv);border:1px solid var(--ol)}
 
 /* Developer bio */
-.db{white-space:pre-line;text-align:left}
+.db{white-space:pre-line;text-align: center}
 .db.clamp{display:-webkit-box;-webkit-line-clamp:5;-webkit-box-orient:vertical;overflow:hidden}
 .tg{align-self:center;margin-top:8px;height:48px;padding:0 20px;border-radius:24px;color:var(--pt);font-weight:500;position:relative;overflow:hidden}
 .tg[hidden]{display:none}
@@ -100,7 +100,7 @@ select{width:100%;height:56px;padding:0 16px;border:1px solid var(--ol);border-r
 .tp{width:150px;height:150px;border-radius:50%;object-fit:cover;display:block;border:3px solid var(--pc);background:var(--sh)}
 .tn2{font-size:22px;font-weight:500}
 .tr{font-size:20px;color:var(--pt);font-weight:500;text-align:center}
-.tbio{font-size:20px;line-height:1.5;color:var(--osv);text-align:left;width:100%}
+.tbio{font-size:20px;line-height:1.4;color:var(--osv);text-align:left;width:100%}
 .tb{flex:none;display:flex;justify-content:center;padding-top:8px}
 .fab{width:56px;height:56px;border-radius:16px;background:var(--pc);color:var(--opc);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;box-shadow:0 2px 6px rgba(0,0,0,.25)}
 .fab::after,.tg::after{content:"";position:absolute;left:0;top:0;right:0;bottom:0;background:var(--pr);opacity:0;transition:opacity .15s}
@@ -147,7 +147,7 @@ select{width:100%;height:56px;padding:0 16px;border:1px solid var(--ol);border-r
 #pVerse{overflow:hidden}
 #pVerse select{width:calc(100dvw - 32px);height:56px;flex:none;margin:16px;padding:0 24px 0 32px;border:3px solid var(--os);border-radius:28px;background:var(--s);color:var(--os);font-size:20px}
 .vc{flex:1;min-height:0;width:100dvw;overflow-y:auto;background:var(--sl);padding:28px 20px;display:flex;flex-direction:column;gap:16px}
-.vc .vt{flex:1;display:flex;align-items:center;font-size:28px}
+.vc .vt{flex:1;display:flex;align-items:center;font-size:26px}
 
 .qs{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;color:var(--osv);text-align:center;padding:24px}
 .qs h2{font-size:26px;color:var(--pt)}
@@ -159,7 +159,7 @@ select{width:100%;height:56px;padding:0 16px;border:1px solid var(--ol);border-r
 .bi.on{color:var(--os)}
 .bi.on .pl{background:var(--sc);color:var(--osc)}
 
-.mp{font-size:20px;line-height:1.55;color:var(--osv);margin-bottom:14px;text-align:left}
+.mp{font-size:20px;line-height:1.5;color:var(--osv);margin-bottom:14px;text-align:left}
 
 /* DB ticker pills and privacy heading */
 .tk .tm{padding:4px 16px;border-radius:16px}
