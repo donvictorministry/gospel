@@ -338,3 +338,10 @@ mark{background:var(--pc);color:var(--opc);padding:0 6px;border-radius:6px;font-
 .vbd,.vbt{display:flex;align-items:center;justify-content:center;flex:none}
 .vbt{width:40px;height:40px;border-radius:20px;position:relative;overflow:hidden}
 .vbd .ic,.vbt .ic{width:28px;height:28px;color:var(--p)}
+
+/* ===== v9: single-row developer name; verified pill buttons ===== */
+.dcard .dn{white-space:nowrap;font-size:24px}
+.vpill{position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;gap:10px;height:52px;padding:0 22px;margin-top:4px;border-radius:26px;background:var(--s);color:var(--pt);border:2px solid var(--p);font-size:20px;font-weight:700;box-shadow:0 4px 12px rgba(0,0,0,.2);flex:none}
+.vpill .ic{width:26px;height:26px;color:var(--p)}
+.vpill::after{content:"";position:absolute;left:0;top:0;right:0;bottom:0;background:var(--pr);opacity:0;transition:opacity .15s}
+.vpill:active::after{opacity:1}
