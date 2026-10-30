@@ -1,6 +1,6 @@
 /* Developer modal data. */
 var DEV_PHOTO_URL = "https://app.donvictorministry.org.ng/gospel/dvg-logo-pic.png";
-var DEV_NAME = "Rev Don Victor, PhD";
+var DEV_NAME = "Rev. Don Victor, PhD";
 var LOGO_URL = "https://app.donvictorministry.org.ng/gospel/no-1-dvm-logo.png";
 var SIDEBAR_LOGO_URL = "https://app.donvictorministry.org.ng/gospel/no-1-dvm-logo.png";
 
