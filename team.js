@@ -1,6 +1,3 @@
-
-
-
 var TEAM = [
   { name: "Amb. David Etim", tag: "Director", role: "Co Founder | Director | Senior Administrator", photo: "https://i.ibb.co/0RvC1sCc/Screenshot-20260214-191218.png",
     bio: "Amb. David is a worship leader and professional instrumentalist who has impacted thousands of lives across different nations through his live worship performances and numerous gospel albums. He is the Co-Founder, Director, and Senior Administrator of Don Victor Ministries, working closely with the Founder to strengthen the ministry’s operations and advance its global vision with integrity, unity, and excellence." },
