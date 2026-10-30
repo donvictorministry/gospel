@@ -4,7 +4,7 @@ var PROP_NOTICE = {
   title: "Proprietary Software Notification",
   head: "IMPORTANT NOTICE",
   paragraphs: [
-    "This is a proprietary software product developed exclusively by Rev. Don Victor, PhD",
+    "This is a proprietary software product developed exclusively by Rev. Don Victor, PhD.",
     "You are authorized to use this application for personal purposes only. Any unauthorized reproduction, distribution, or modification of this application is strictly prohibited and constitutes a violation of intellectual property law.",
     "Dr. Don Victor, DV Network Engine, actively monitors, detects, and safeguards against unauthorized access, modification, and unlawful tampering. Any infringement, misuse, or attempt to compromise the integrity of this application may result in appropriate legal action and other remedies available under applicable laws.",
   ],
