@@ -1,7 +1,7 @@
 /* badge.js: Honor (12/12), Golden (10/12) and Silver (8/12) badges. Shown only at the end of a quiz.
    Each badge shows: ministry name, user name, date issued, president name, app URL and a line of verse. */
 var Badge = (function () {
-  var CFG = { ministry: "Don Victor Ministries", president: "Rev. Dr. Don Victor, PhD",
+  var CFG = { ministry: "Don Victor Ministries", president: "Rev. Don Victor, PhD",
     logo: "https://app.donvictorministry.org.ng/gospel/no-1-dvm-logo.png" };  
   var LOGO = null;
   (function () {
