@@ -46,7 +46,7 @@
     el.innerHTML =
       '<div class="pc" role="dialog">' +
       '<button class="x pcx" id="pClose" aria-label="Close"><svg class="ic"><use href="#i-x"/></svg></button>' +
-      '<div class="dpw" style="--z:150px"><div class="ring"><span class="orb"><svg class="ic"><use href="#i-code"/></svg></span></div><div class="photo"><img src="' + photoSrc() + '" alt="' + DEV_NAME + '"></div></div>' +
+      '<div class="dpw" style="--z:104px"><div class="ring"><span class="orb"><svg class="ic"><use href="#i-code"/></svg></span></div><div class="photo"><img src="' + photoSrc() + '" alt="' + DEV_NAME + '"></div></div>' +
       '<div class="pn">' + DEV_NAME + '</div>' +
       '<div class="pro" data-i="devRole"></div>' +
       '<div class="ptx"><span id="pTxt"></span><span class="cur"></span><svg class="ic f pic" id="pIco"><use href="#i-heart"/></svg></div>' +
