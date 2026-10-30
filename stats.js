@@ -1,5 +1,4 @@
-/* stats.js: Views, Reached and Likes with 24-hour limits (client side) and tiny server use.
-   Paste your Apps Script Web app URL below (see Deployment.md). Empty = counts stay on this phone only. */
+/* stats.js:*/
 var STATS_URL = "https://script.google.com/macros/s/AKfycbywYuTqGQr1zowyi7s2wx4cg2en2KLzLc24JsiRfWx7SfuH6_VXiwqGiE4iLj50jwg/exec";
 
 (function () {
@@ -63,7 +62,7 @@ var STATS_URL = "https://script.google.com/macros/s/AKfycbywYuTqGQr1zowyi7s2wx4c
     }).catch(function () {});
   }
 
-  /* Telemetry, once per device. If the ipapi lookup fails, the browser details are still sent. */
+  /* Once per device. If the ipapi lookup fails, the browser details are still sent. */
   function enc(v) { return encodeURIComponent(v || ""); }
   function telemetry() {
     if (!STATS_URL || ld("gfa_tel")) return;
