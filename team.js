@@ -83,7 +83,7 @@ var TEAM = [
     if (!canRun()) return;
     running = true;
     var dev = document.getElementById("devPhoto");
-    var items = [{ s: dev ? dev.src : PH, n: DEV_NAME.split(" ")[0], dev: true }];
+    var items = [{ s: dev ? dev.src : PH, n: "Founder", dev: true }];
     TEAM.forEach(function (m) { items.push({ s: src(m), n: m.tag }); });
     var strip = document.createElement("div");
     strip.className = "pr";
