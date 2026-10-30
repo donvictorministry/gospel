@@ -2,19 +2,19 @@
    EDIT THE TEAM ARRAY BELOW: put each member's real name, role, short tag, photo URL and bio.
    Leave photo as "" to keep the placeholder. */
 var TEAM = [
-  { name: "Team Member 1", tag: "Co Founder", role: "Prayer and Intercession Lead", photo: "",
+  { name: "Team Member 1", tag: "Prayer", role: "Prayer and Intercession Lead", photo: "",
     bio: "Leads daily prayer for every outreach, app release and partner church. Gathers prayer requests from the community and brings them before God each morning. Hosts weekly online prayer across time zones." },
-  { name: "Team Member 2", tag: "Director", role: "Scripture and Content Editor", photo: "",
+  { name: "Team Member 2", tag: "Scripture", role: "Scripture and Content Editor", photo: "",
     bio: "Reviews every verse, devotional and message before it is published. Makes sure the Word is handled faithfully and clearly. Keeps the content simple enough for a new believer and deep enough to grow on." },
-  { name: "Team Member 3", tag: "Director", role: "Translation Lead", photo: "",
+  { name: "Team Member 3", tag: "Translation", role: "Translation Lead", photo: "",
     bio: "Coordinates the translations for every language in the app, including Hausa, Yoruba and Igbo. Works with native speakers to proofread each text so that the Gospel is heard in the heart language of every reader." },
-  { name: "Team Member 4", tag: "Director", role: "Community Manager", photo: "",
+  { name: "Team Member 4", tag: "Community", role: "Community Manager", photo: "",
     bio: "Cares for the WhatsApp community and welcomes every new member. Answers questions, shares testimonies and celebrates each person who shares the app. Keeps the community warm, safe and encouraging." },
-  { name: "Team Member 5", tag: "Administrator", role: "Media and Design Lead", photo: "",
+  { name: "Team Member 5", tag: "Media", role: "Media and Design Lead", photo: "",
     bio: "Creates the verse cards, graphics and short videos that carry the message across social media. Keeps the look of every app clean, simple and beautiful, so the focus always stays on Jesus and His Word." },
-  { name: "Team Member 6", tag: "Director", role: "Outreach Coordinator", photo: "",
+  { name: "Team Member 6", tag: "Outreach", role: "Outreach Coordinator", photo: "",
     bio: "Builds partnerships with churches, campuses and ministries on all six continents. Plans outreach campaigns, trains local volunteers and tracks how far the Gospel is spreading, one share at a time." },
-  { name: "Team Member 7", tag: "Administrator", role: "Technical Support Lead", photo: "",
+  { name: "Team Member 7", tag: "Support", role: "Technical Support Lead", photo: "",
     bio: "Helps users install and use the app, even on low-cost Android phones with weak internet. Tests every release, fixes problems fast and makes sure nobody is left behind because of technology." }
 ];
 
@@ -25,10 +25,16 @@ var TEAM = [
   function src(m) { return m.photo || PH; }
 
   /* Team modal */
-  var cards = "";
+  var VER = '<span class="vbd"><svg class="ic f"><use href="#i-verified"/></svg></span>';
+  var dph = document.getElementById("devPhoto");
+  var FOUNDER = '<div class="tc tcp"><span class="tcb">Founder &amp; Director</span>' +
+    '<div class="dpw" style="--z:188px"><div class="ring"><span class="orb"><svg class="ic"><use href="#i-code"/></svg></span></div><div class="photo"><img src="' + (dph ? dph.src : PH) + '" alt="' + DEV_NAME + '"></div></div>' +
+    '<div class="tnr"><div class="tn2">' + DEV_NAME + '</div><button class="vbt" id="foundV" aria-label="Verified. Open About Developer"><svg class="ic f"><use href="#i-verified"/></svg></button></div>' +
+    '<div class="tr">' + T.en.devRole + '</div></div>';
+  var cards = FOUNDER;
   TEAM.forEach(function (m, i) {
-    cards += '<div class="tc' + (i < 3 ? " tcp" : "") + '">' + (i < 3 ? '<span class="tcb">Director</span>' : "") + '<img class="tp" src="' + src(m) + '" width="150" height="150" alt="' + m.name + '">' +
-      '<div class="tn2">' + m.name + '</div><div class="tr">' + m.role + '</div><p class="tbio clamp">' + m.bio.replace(/([.!?]) +/g, "$1\n") + '</p><button class="tg tgm" hidden></button></div>';
+    cards += '<div class="tc tcp">' + (i < 3 ? '<span class="tcb">Director</span>' : "") + '<img class="tp" src="' + src(m) + '" width="150" height="150" alt="' + m.name + '">' +
+      '<div class="tnr"><div class="tn2">' + m.name + '</div>' + VER + '</div><div class="tr">' + m.role + '</div><p class="tbio clamp">' + m.bio.replace(/([.!?]) +/g, "$1\n") + '</p><button class="tg tgm" hidden></button></div>';
   });
   var sec = document.createElement("section");
   sec.className = "modal tm";
@@ -39,6 +45,7 @@ var TEAM = [
     '<div class="tl" id="tl">' + cards + '</div>' +
     '<div class="tb"><button class="fab" id="tUp" aria-label="Jump to top"><svg class="ic"><use href="#i-up"/></svg></button></div>';
   document.body.appendChild(sec);
+  document.getElementById("foundV").onclick = function () { GFA.open("mDev"); };
   GFA.render();
 
   var tl = document.getElementById("tl");
