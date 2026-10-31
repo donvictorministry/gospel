@@ -1,5 +1,5 @@
 /* update.js: "New version available" pop-up. Self-contained: its own CSS, HTML and JavaScript.
-   It needs only sw.js (sw.js must wait for the page and answer the message "SKIP_WAITING").
+   It needs only sw.js: the version number in sw.js ("gospel-for-all-v22") is compared with the version this app runs.
    Flow: you bump sw.js -> users get the pop-up the next time they open or return to the app
    -> Update Now -> spinner at screen center -> app reloads on the new version -> thank-you message.
    Later -> the pop-up comes back each time the app is opened or returns to the screen while the update is waiting. */
@@ -53,26 +53,63 @@
   document.body.appendChild(root);
 
   /* ---------- behavior ---------- */
+  var FONTS = "gfa-fonts-v1", need = false, lastCheck = 0;
+
+  function num(n) { var m = /(\d+)$/.exec(n || ""); return m ? +m[1] : 0; }
   function view(v) {
     root.setAttribute("data-v", v);
     if (v) root.classList.add("on"); else root.classList.remove("on");
   }
-  function waiting() { return !!(reg && reg.waiting && navigator.serviceWorker.controller); }
-  function check() { if (!busy && waiting() && !root.classList.contains("on")) view("ask"); }
+  function waitingNow() { return !!(reg && reg.waiting && navigator.serviceWorker.controller); }
+  function remind() { if (need && !busy && !root.classList.contains("on")) view("ask"); }
+
+  /* version this page runs = the OLDEST version cache (the newer one only exists while it is waiting) */
+  function running() {
+    return caches.keys().then(function (ks) {
+      var v = ks.filter(function (k) { return k !== FONTS; }).map(num).filter(Boolean);
+      return v.length ? Math.min.apply(null, v) : 0;
+    });
+  }
+  /* newest version = the number inside sw.js on the server (always read from the network) */
+  function latest() {
+    return fetch("sw.js?gfau=" + Date.now(), { cache: "no-store" }).then(function (r) { return r.text(); }).then(function (t) {
+      var m = /var\s+CACHE\s*=\s*["']([^"']+)["']/.exec(t);
+      return m ? num(m[1]) : 0;
+    });
+  }
+  function look() {
+    if (busy) return;
+    if (Date.now() - lastCheck < 20000) { remind(); return; }
+    lastCheck = Date.now();
+    Promise.all([running(), latest()]).then(function (r) {
+      if ((r[0] && r[1] && r[1] > r[0]) || waitingNow()) { need = true; remind(); }
+    }).catch(function () { if (waitingNow()) { need = true; remind(); } });
+  }
 
   function apply() {
     busy = true;
     view("load");
-    var once = false;
+    var once = false, n = 0;
     function go() {
       if (once) return;
       once = true;
       try { localStorage.setItem(KEY, "1"); } catch (e) {}
       location.reload();
     }
+    function nuke() { /* last resort: forget the old app completely, then reload from the network */
+      var jobs = [caches.keys().then(function (ks) {
+        return Promise.all(ks.filter(function (k) { return k !== FONTS; }).map(function (k) { return caches.delete(k); }));
+      })];
+      if (reg) jobs.push(reg.unregister());
+      Promise.all(jobs).then(go, go);
+    }
     navigator.serviceWorker.addEventListener("controllerchange", go);
-    if (reg && reg.waiting) reg.waiting.postMessage("SKIP_WAITING"); else go();
-    setTimeout(go, 12000);
+    if (reg) reg.update().catch(function () {});
+    var t = setInterval(function () {
+      n++;
+      if (reg && reg.waiting) { clearInterval(t); reg.waiting.postMessage("SKIP_WAITING"); setTimeout(nuke, 6000); }
+      else if (n > 44) { clearInterval(t); nuke(); }
+    }, 300);
   }
 
   function share() {
@@ -92,17 +129,18 @@
   try { done = localStorage.getItem(KEY); localStorage.removeItem(KEY); } catch (e) {}
   if (done) view("thx");
 
-  /* watch for a new sw.js */
+  /* look for a new version when the app opens, a few seconds later, and every time it returns to the screen */
   navigator.serviceWorker.ready.then(function (r) {
     reg = r;
-    check();
+    look();
+    setTimeout(function () { lastCheck = 0; look(); }, 5000);
     r.addEventListener("updatefound", function () {
       var w = r.installing;
-      if (w) w.addEventListener("statechange", function () { if (w.state === "installed") check(); });
+      if (w) w.addEventListener("statechange", function () { if (w.state === "installed") { lastCheck = 0; look(); } });
     });
     r.update().catch(function () {});
     document.addEventListener("visibilitychange", function () {
-      if (document.visibilityState === "visible") { r.update().catch(function () {}); check(); }
+      if (document.visibilityState === "visible") { r.update().catch(function () {}); look(); }
     });
   });
 })();
