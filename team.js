@@ -1,16 +1,14 @@
 var TEAM = [
   { name: "Amb. David Etim", tag: "Director", role: "Co Founder | Director | Senior Administrator", photo: "https://app.donvictorministry.org.ng/gospel/amb-pic.png",
     bio: "Amb. David is a worship leader and professional instrumentalist who has impacted thousands of lives across different nations through his live worship performances and numerous gospel albums. He is the Co-Founder, Director, and Senior Administrator of Don Victor Ministries, working closely with the Founder to strengthen the ministry’s operations and advance its global vision with integrity, unity, and excellence." },
-  { name: "Pastor Vani Aldianto", tag: "Director", role: "Director | Senior Administrator", photo: "https://app.donvictorministry.org.ng/gospel/pastor-vani-photo.jpg",
+  { name: "Pastor Vani Aldianto", tag: "Official", role: "Director | Senior Administrator", photo: "https://app.donvictorministry.org.ng/gospel/pastor-vani-photo.jpg",
     bio: "Brother Aldianto is a devoted, mission driven leader with a deep passion to see the gospel sent to the nations. As an ordained minister serving faithfully on the frontline. He serves as Senior Administrator of Don Victor Ministries, providing strategic oversight and coordinating the administrative structure of the online community." },
-  { name: "Mrs. Irene Sayomi", tag: "Director", role: "Senior Administrator | Counselor", photo: "https://app.donvictorministry.org.ng/gospel/sis-irene.png",
+  { name: "Mrs. Irene Sayomi", tag: "Official", role: "Senior Administrator | Counselor", photo: "https://app.donvictorministry.org.ng/gospel/sis-irene.png",
     bio: "Mrs. Irene is a devoted child of God with a heart for souls and a deep passion for global evangelism. As Administrator of Don Victor Ministries, she serves with love, faithfulness, and dedication, providing steadfast support to the ministry and helping advance its vision of reaching nations with the gospel of Jesus Christ." },
   { name: "Pastor Michael Agwara, BSc", tag: "Official", role: "Administrator | Leader", photo: "https://app.donvictorministry.org.ng/gospel/mike-pastor-pic.png",
     bio: "Pastor Agwara  is a passionate servant of God, devoted soul winner, and dynamic public speaker with a passion for business and the gospel. He is the founder of De Michael Design, and serves as an Administrator of the Don Victor Ministries Online Community, contributing to its growth and effectiveness." },
   { name: "Apostle Joseph Kalu", tag: "Official", role: "Administrator", photo: "https://app.donvictorministry.org.ng/gospel/pastor-kalu.png",
     bio: "Pastor Kalu is a dedicated minister of the gospel, passionate about sound doctrine, biblical teaching, and evangelism. He uses drama to communicate the message of salvation and serves as an Administrator of the Don Victor Ministries Online Community, contributing to the advancement of the gospel." },
-  { name: "Team Member 6", tag: "Reserved", role: "Outreach Coordinator", photo: "",
-    bio: "Builds partnerships with churches, campuses and ministries on all six continents. Plans outreach campaigns, trains local volunteers and tracks how far the Gospel is spreading, one share at a time." },
   { name: "Mrs. Joy Don Victor", tag: "Official", role: "Director of Women Affairs", photo: "https://app.donvictorministry.org.ng/gospel/joy-pic.png",
     bio: "Mrs. Joy serves as the Director of Women Affairs at Don Victor Ministries, providing dedicated support to the ministry’s leadership. Through her prayers, wisdom, and commitment, she contributes to strengthening the ministry and advancing its global evangelistic vision." }
 ];
