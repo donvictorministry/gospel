@@ -69,5 +69,5 @@
 
   var seen = false;
   try { seen = sessionStorage.getItem("gfa_pop") === "1"; sessionStorage.setItem("gfa_pop", "1"); } catch (e) {}
-  if (!seen) setTimeout(open, 1800);
+  if (!seen) setTimeout(open, 300000);
 })();
