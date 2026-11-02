@@ -129,7 +129,7 @@
     var build = function () {
       var st = document.createElement('style'); st.textContent = css; document.head.appendChild(st);
       /* the app logo (follows any logo you swap in), with the app icon as the fallback */
-      var li = document.querySelector('.hc .li'), logo = li && li.getAttribute('src') ? li.getAttribute('src') : 'icon-192.png';
+      var li = document.querySelector('.hc .li'), logo = li && li.getAttribute('src') ? li.getAttribute('src') : 'no-1-dvm-logo.png';
       host = document.createElement('div'); host.id = P; host.setAttribute('role', 'dialog'); host.setAttribute('aria-modal', 'true'); host.setAttribute('aria-label', 'Human check');
       host.innerHTML = '<div class="' + P + '-blob ' + P + '-b1"></div><div class="' + P + '-blob ' + P + '-b2"></div><div class="' + P + '-card"><div class="' + P + '-brand"><img class="' + P + '-logo" src="' + esc(logo) + '" alt="">' + APP + '</div><span class="' + P + '-badge"><svg viewBox="0 0 24 24" style="width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="' + I.shield + '"/></svg>Quick human check</span><div id="' + P + '-box"></div><div class="' + P + '-fb" id="' + P + '-fb" role="status" aria-live="polite"></div></div>';
       document.body.appendChild(host); card = host.querySelector('.' + P + '-card'); box = document.getElementById(P + '-box'); fb = document.getElementById(P + '-fb');
