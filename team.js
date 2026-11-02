@@ -1,5 +1,5 @@
 var TEAM = [
-  { name: "Amb. David Etim", tag: "Director", role: "Co Founder | Director | Senior Administrator", photo: "https://app.donvictorministry.org.ng/gospel/amb-pic.png",
+  { name: "Amb. David Etim", tag: "Director", role: "Co Founder | Director | Senior Administrator", photo: "https://app.donvictorministry.org.ng/gospel/king-david.png",
     bio: "Amb. David is a worship leader and professional instrumentalist who has impacted thousands of lives across different nations through his live worship performances and numerous gospel albums. He is the Co-Founder, Director, and Senior Administrator of Don Victor Ministries, working closely with the Founder to strengthen the ministry’s operations and advance its global vision with integrity, unity, and excellence." },
   { name: "Pastor Vani Aldianto", tag: "Official", role: "Director | Senior Administrator", photo: "https://app.donvictorministry.org.ng/gospel/pastor-vani-photo.jpg",
     bio: "Brother Aldianto is a devoted, mission driven leader with a deep passion to see the gospel sent to the nations. As an ordained minister serving faithfully on the frontline. He serves as Senior Administrator of Don Victor Ministries, providing strategic oversight and coordinating the administrative structure of the online community." },
